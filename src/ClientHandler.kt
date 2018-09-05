@@ -3,7 +3,7 @@ import java.net.Socket
 import java.nio.charset.Charset
 import java.util.*
 
-class ClientHandler(val uid: Int, tcpClient: Socket, observer: Observer<ClientMessageEvent>, observable: Observable<ServerMessageEvent>): Observer<ServerMessageEvent>, Observable<ClientMessageEvent>, Runnable {
+class ClientHandler(val uid: Long, tcpClient: Socket, observer: Observer<ClientMessageEvent>, observable: Observable<ServerMessageEvent>): Observer<ServerMessageEvent>, Observable<ClientMessageEvent>, Runnable {
     private val client: Socket = tcpClient
     private val observable: Observable<ServerMessageEvent> = observable
     private val reader: Scanner = Scanner(tcpClient.getInputStream())

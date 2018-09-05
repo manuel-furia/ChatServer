@@ -1,10 +1,13 @@
 import java.util.*
 
+/**
+ * Represents a room in the server. The messages in the room are visible only to users that joined it.
+ */
 data class ChatRoom (val name: String,
-                val greeting: String = "",
+                val greeting: String = "", //Message to be shown when a user logs in
                 val users: Set<ChatUser> = setOf(),
-                val whitelist: Set<ChatUser> = setOf(),
-                val blacklist: Set<ChatUser> = setOf(),
+                val whitelist: Set<ChatUser> = setOf(), //If not empty, only listed users can join the room
+                val blacklist: Set<ChatUser> = setOf(), //Listed users can not join the room
                 val permissions: Map<ChatUser, UserPermissions> = mapOf(),
                 val defaultPermission: UserPermissions = UserPermissions.VOICE) {
 
@@ -12,97 +15,78 @@ data class ChatRoom (val name: String,
         NONE, READ, VOICE, MOD, ADMIN
     }
 
+    /**
+     * Take a list uf users and return only the ones of those that are in the room
+     */
     fun filterJoinedUsers(userList: Set<ChatUser>): Set<ChatUser> {
         return userList.intersect(users)
     }
 
+    /**
+     * Return true if a user is in the room, false otherwise
+     */
     fun isUserInRoom(user: ChatUser): Boolean = users.contains(user)
 
+    /**
+     * Returns a room with the specified greeting message to show when a user joins
+     */
     fun setTopic(topic: String): ChatRoom {
         return this.copy(greeting = topic)
     }
 
+    /**
+     * Returns a room with added the specified user, if possible, otherwise returns the old room
+     */
     fun userJoin(user: ChatUser): ChatRoom {
+        //Check if whitelisted or not blacklisted
         if ((whitelist.size == 0 || whitelist.contains(user)) && !blacklist.contains(user)) {
 
+            //Check if the user is server admin. If he is, make it also room admin
             val permission = if (users.size == 0 || user.level == ChatUser.Level.ADMIN)
                 UserPermissions.ADMIN
             else
                 defaultPermission
 
-            return ChatRoom(name, users = users + user, permissions = permissions + (user to permission))
+            return this.copy(name, users = users + user, permissions = permissions + (user to permission))
         } else {
             return this
         }
     }
 
+    /**
+     * Remove the user from the room
+     */
     fun userLeave(user: ChatUser): ChatRoom {
-        return ChatRoom(name, users = users - user)
+        return this.copy(name, users = users - user)
     }
 
     fun setPermissions(user: ChatUser, permission: UserPermissions): ChatRoom {
-        return ChatRoom(name, permissions = permissions + Pair(user, permission))
+        return this.copy(name, permissions = permissions + Pair(user, permission))
     }
 
+    /**
+     * A user granting permissions to another user with lower permissions
+     */
     fun grantPermissionsFrom(userFrom: ChatUser, userTo: ChatUser, permission: UserPermissions): ChatRoom {
         val userFromPermission = permissions.getOrDefault(userFrom, defaultPermission)
         val userToPermission = permissions.getOrDefault(userFrom, defaultPermission)
 
         if (userFromPermission >= userToPermission) {
-            return ChatRoom(name, permissions = permissions + Pair(userTo, permission))
+            return this.copy(name, permissions = permissions + Pair(userTo, permission))
         } else {
             return this
         }
     }
 
-    fun blacklistAdd(user: ChatUser): ChatRoom = ChatRoom(name, blacklist = blacklist + user)
-    fun whitelistAdd(user: ChatUser): ChatRoom = ChatRoom(name, whitelist = whitelist + user)
-    fun blacklistRemove(user: ChatUser): ChatRoom = ChatRoom(name, blacklist = blacklist - user)
-    fun whitelistRemove(user: ChatUser): ChatRoom = ChatRoom(name, whitelist = whitelist - user)
-    fun blacklistClear(user: ChatUser): ChatRoom = ChatRoom(name, blacklist = setOf())
-    fun whitelistClear(user: ChatUser): ChatRoom = ChatRoom(name, blacklist = setOf())
+    //The following methods manipulate the whitelist and blacklist lists.
 
-    fun blacklistAddFrom(userFrom: ChatUser, user: ChatUser): ChatRoom {
-        if (canUserBan(userFrom))
-            return ChatRoom(name, blacklist = blacklist + user)
-        else
-            return this
-    }
+    fun blacklistAdd(user: ChatUser): ChatRoom = this.copy(name, blacklist = blacklist + user)
+    fun whitelistAdd(user: ChatUser): ChatRoom = this.copy(name, whitelist = whitelist + user)
+    fun blacklistRemove(user: ChatUser): ChatRoom = this.copy(name, blacklist = blacklist - user)
+    fun whitelistRemove(user: ChatUser): ChatRoom = this.copy(name, whitelist = whitelist - user)
+    fun blacklistClear(user: ChatUser): ChatRoom = this.copy(name, blacklist = setOf())
+    fun whitelistClear(user: ChatUser): ChatRoom = this.copy(name, blacklist = setOf())
 
-    fun blacklistRemoveFrom(userFrom: ChatUser, user: ChatUser): ChatRoom {
-        if (canUserBan(userFrom))
-            return ChatRoom(name, blacklist = blacklist - user)
-        else
-            return this
-    }
-
-    fun whitelistAddFrom(userFrom: ChatUser, user: ChatUser): ChatRoom {
-        if (canUserBan(userFrom))
-            return ChatRoom(name, blacklist = whitelist + user)
-        else
-            return this
-    }
-
-    fun whitelistRemoveFrom(userFrom: ChatUser, user: ChatUser): ChatRoom {
-        if (canUserBan(userFrom))
-            return ChatRoom(name, blacklist = whitelist - user)
-        else
-            return this
-    }
-
-    fun blacklistClearFrom(userFrom: ChatUser): ChatRoom {
-        if (canUserBan(userFrom))
-            return ChatRoom(name, blacklist = setOf())
-        else
-            return this
-    }
-
-    fun whitelistClearFrom(userFrom: ChatUser): ChatRoom {
-        if (canUserBan(userFrom))
-            return ChatRoom(name, whitelist = setOf())
-        else
-            return this
-    }
 
     fun canUserRead(user: ChatUser) : Boolean{
         return permissions.getOrDefault(user, defaultPermission) >= UserPermissions.READ

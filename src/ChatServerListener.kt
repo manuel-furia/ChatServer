@@ -2,24 +2,40 @@ import com.sun.xml.internal.ws.api.model.wsdl.WSDLBoundOperation
 import java.net.ServerSocket
 import kotlin.concurrent.thread
 
-
+/**
+ * Takes care of accepting clients and handling the communication between server and clients
+ */
 class ChatServerListener (serverState: ChatServerState, val port: Int = 61673) : Observer<ClientMessageEvent>, SelectiveObservable<ServerMessageEvent> {
 
+    /**
+     * Contains the logical state of the server
+     */
     var serverState: ChatServerState = serverState
     private set
 
-    var currentID: Int = 1
+    /**
+     * Last used ID for a client
+     */
+    var currentID: Long = 1
 
-    var clients: Bijection<Observer<ServerMessageEvent>, Int> = BijectionMap()
+    /**
+     * Clients <-> ID bijection
+     */
+    var clients: Bijection<Observer<ServerMessageEvent>, Long> = BijectionMap()
 
     fun listen(){
         try {
+            //Listen to the specified port
             val socket = ServerSocket(port)
             println("Server is running on port ${socket.localPort}")
 
             while (true) {
+                //Wait for the next client that will connect, accepting it when it does
                 val client = socket.accept()
+
                 println("Client connected: ${client.inetAddress.hostAddress}")
+
+                //Create a client handles for the new client
                 val clientHandler = ClientHandler(currentID, client, this, this)
 
                 //Register the new unknown user
@@ -28,6 +44,7 @@ class ChatServerListener (serverState: ChatServerState, val port: Int = 61673) :
                         clientHandler.uid,
                         ChatUser.Level.UNKNOWN)
 
+                //Process the output from the registration of the new user
                 processOutputFromServer(serverState.currentOutput)
 
                 // Run client in it's own thread.
@@ -40,29 +57,39 @@ class ChatServerListener (serverState: ChatServerState, val port: Int = 61673) :
         }
     }
 
+    /**
+     * Takes the output of a server state and executes the list of pending actions that it contains
+     * Once executed, the current server state is replaced with a new one without pending actions
+     */
     private fun processOutputFromServer(currentOutput: List<ServerOutput>){
-        //Execute the server output
+        //Get the server output (list of pending actions)
         val outputs = serverState.currentOutput
 
-
+        //For each output action, execute the appropriate effect
         outputs.forEach { output ->
 
             when (output){
                 is ServerOutput.DropClient -> {
-                    val clientHandler = clients.inverse(output.clientID)
+                    val clientHandler = clients.inverse(output.clientID) //Get ClientHandler from its ID
                     if (clientHandler != null)
                         notifyObserver(clientHandler, ServerMessageEvent(ServerMessageEvent.Action.STOP))}
                 is ServerOutput.BanClient -> {}
                 is ServerOutput.LiftBan -> {}
                 is ServerOutput.ServiceMessageToClient -> {
-                    val clientHandler = clients.inverse(output.clientID)
+                    val clientHandler = clients.inverse(output.clientID) //Get ClientHandler from its ID
                     if (clientHandler != null)
-                        notifyObserver(clientHandler, ServerMessageEvent(ServerMessageEvent.Action.MESSAGE, output.msg))
+                        notifyObserver(
+                                clientHandler,
+                                //Note: Replacing " from " to " From " is necessary as, by specification, server messages are unmarked
+                                //      making the absence of " from " the only way to distinguish them from user messages
+                                ServerMessageEvent(ServerMessageEvent.Action.MESSAGE, output.msg.replace(" from ", " From "))
+                        )
                 }
                 is ServerOutput.MessageFromUserToRoom -> {
                     val roomName = output.message.room.name
+                    //Send the messages only to clients of users that are members of the target room
                     serverState.getClientIDsInRoom(roomName).forEach {
-                        val client = clients.inverse(it)
+                        val client = clients.inverse(it) //Get ClientHandler from its ID
                         if (client != null)
                             notifyObserver(
                                     client,
@@ -71,11 +98,11 @@ class ChatServerListener (serverState: ChatServerState, val port: Int = 61673) :
                     }
                 }
                 is ServerOutput.Ping -> {
-                    val clientHandler = clients.inverse(output.clientID)
+                    val clientHandler = clients.inverse(output.clientID) //Get ClientHandler from its ID
                     if (clientHandler != null)
                         notifyObserver(clientHandler, ServerMessageEvent(ServerMessageEvent.Action.PING))
                 }
-                is ServerOutput.None -> {}
+                is ServerOutput.None -> {} //No action
             }
         }
 

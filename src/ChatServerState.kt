@@ -6,16 +6,16 @@ data class ChatServerState (
         val adminCredentials: Map<String, String> = mapOf(Constants.defaultAdminUsername to Constants.defaultAdminPassword),
         val messageHistory: ChatHistory = ChatHistory.empty,
         val bannedIPs: Set<String> = setOf(),
-        private val usersAndIds: Bijection<ChatUser, Int> = BijectionMap()) {
+        private val usersAndIds: Bijection<ChatUser, Long> = BijectionMap()) {
 
     //User that represents the server, and send messages on its behalf
     val serverUser = ChatUser(Constants.serverMessageUserName, ChatUser.Level.ADMIN)
 
-    fun registerUser(userName: String, clientHandlerID: Int, permission: ChatUser.Level = ChatUser.Level.NORMAL): ChatServerState {
+    fun registerUser(userName: String, clientHandlerID: Long, permission: ChatUser.Level = ChatUser.Level.NORMAL): ChatServerState {
         return usernameValidateAndInsert(userName, clientHandlerID, permission).second
     }
 
-    private fun usernameValidateAndInsert(userName: String, clientHandlerID: Int, permission: ChatUser.Level = ChatUser.Level.NORMAL): Pair<ChatUser?, ChatServerState>{
+    private fun usernameValidateAndInsert(userName: String, clientHandlerID: Long, permission: ChatUser.Level = ChatUser.Level.NORMAL): Pair<ChatUser?, ChatServerState>{
         val validUserName = Utils.produceValidUsername(userName)
         val user = ChatUser(validUserName, permission)
         val newUsersAndIDs = usersAndIds + (user to clientHandlerID)
@@ -192,7 +192,7 @@ data class ChatServerState (
 
     fun getUserByUsername(username: String): ChatUser? = users.find { it.username == username }
 
-    fun userToClientID(user: ChatUser): Int? = usersAndIds.direct(user)
+    fun userToClientID(user: ChatUser): Long? = usersAndIds.direct(user)
 
     fun addBannedIP(ip: String): ChatServerState = this.copy(bannedIPs = bannedIPs + ip)
 
@@ -211,7 +211,7 @@ data class ChatServerState (
         return this
     }
 
-    fun processIncomingMessageFromClient(clientID: Int, message: String): ChatServerState {
+    fun processIncomingMessageFromClient(clientID: Long, message: String): ChatServerState {
         val user = usersAndIds.inverse(clientID) ?: ChatUser("", ChatUser.Level.UNKNOWN)
 
         val (room, content) = if (message.startsWith(Constants.roomSelectionPrefix)) {
@@ -246,9 +246,9 @@ data class ChatServerState (
         }
     }
 
-    fun getClientIDsInRoom(roomName: String): Set<Int> = getUsersInRoom(roomName).mapNotNull{userToClientID(it)}.toSet()
+    fun getClientIDsInRoom(roomName: String): Set<Long> = getUsersInRoom(roomName).mapNotNull{userToClientID(it)}.toSet()
 
-    fun serverErrorTo(msg: String, clientID: Int): ChatServerState{
+    fun serverErrorTo(msg: String, clientID: Long): ChatServerState{
         return this.copy(currentOutput = currentOutput + ServerOutput.ServiceMessageToClient(msg, clientID))
     }
 

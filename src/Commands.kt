@@ -40,9 +40,16 @@ object Commands {
 
             ":room" to {params ->
 
-                val roomName = params.argumentLine.trim().split(" ").getOrNull(0)?.trim() ?: ""
+                if (params.user.level < ChatUser.Level.NORMAL) {
 
-                params.server.addRoom(roomName).userJoinRoom(roomName, params.user.username)
+                    params.server.appendOutput(ServerOutput.permissionDenied(params.user.level, ChatUser.Level.NORMAL, params.clientID))
+
+                } else {
+
+                    val roomName = params.argumentLine.trim().split(" ").getOrNull(0)?.trim() ?: ""
+
+                    params.server.addRoom(roomName).userJoinRoom(roomName, params.user.username)
+                }
             },
 
             ":topic" to {params ->
@@ -62,16 +69,16 @@ object Commands {
                 val arg = params.argumentLine.trim()
 
                 val message = if (arg == "all" && params.user.level == ChatUser.Level.ADMIN){
-                    params.server.users.fold("Users:\n") { s, user ->
+                    params.server.users.sortedBy { it.username }.fold("Users:\n") { s, user ->
                         val rooms = params.server.rooms.filter { it.isUserInRoom(user) } .fold(""){z, room ->
                             z + room.name + " "
                         }
                         s + user.username + " " + user.level.name + " in " + rooms + "\n"
                     }
                 } else if (arg == "details") {
-                    params.room.users.fold("Users:\n") { s, user -> s + user.username + " " + user.level.name + "\n" }
+                    params.room.users.sortedBy { it.username }.fold("Users:\n") { s, user -> s + user.username + " " + user.level.name + "\n" }
                 } else {
-                    params.room.users.fold("Users:\n") { s, user -> s + user.username + "\n" }
+                    params.room.users.sortedBy { it.username }.fold("Users:\n") { s, user -> s + user.username + "\n" }
                 }
 
 

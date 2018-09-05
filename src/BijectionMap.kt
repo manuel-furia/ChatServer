@@ -1,3 +1,7 @@
+/**
+ * Naive implementation of a bijection using Map
+ * Not efficient for inner loops
+ */
 class BijectionMap<Domain, Codomain>(private val pairs: Set<Pair<Domain, Codomain>>): Bijection<Domain, Codomain> {
 
     constructor(): this(setOf())
@@ -13,10 +17,16 @@ class BijectionMap<Domain, Codomain>(private val pairs: Set<Pair<Domain, Codomai
         get() = inverseMap.keys
 
 
+    /**
+     * Apply direct map (get an element of the codomain from an element of the domain)
+     */
     override fun direct(p: Domain): Codomain? {
         return directMap.get(p)
     }
 
+    /**
+     * Apply inverse map (get an element of the domain from an element of the codomain)
+     */
     override fun inverse(q: Codomain): Domain? {
         return inverseMap.get(q)
     }
@@ -29,6 +39,9 @@ class BijectionMap<Domain, Codomain>(private val pairs: Set<Pair<Domain, Codomai
         return BijectionMap(pairs - pair)
     }
 
+    /**
+     * Return a new bijection missing the pair that has as domain element the specified one
+     */
     override fun removeByDomainElement(d: Domain): Bijection<Domain, Codomain> {
         val pair = find { it.first == d }
         if (pair != null) {
@@ -38,6 +51,9 @@ class BijectionMap<Domain, Codomain>(private val pairs: Set<Pair<Domain, Codomai
         }
     }
 
+    /**
+     * Return a new bijection missing the pair that has as domain element the specified one
+     */
     override fun removeByCodomainElement(d: Codomain): Bijection<Domain, Codomain> {
         val pair = find { it.second == d }
         if (pair != null) {
