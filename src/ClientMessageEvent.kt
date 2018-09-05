@@ -1,0 +1,1 @@
+data class ClientMessageEvent (val sender: ClientHandler, val msg: String)
