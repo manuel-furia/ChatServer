@@ -27,7 +27,18 @@ object Commands {
 
                 val newUsername = params.argumentLine.trim().split(" ").getOrNull(0)?.trim() ?: ""
 
-                params.server.changeUsername(params.user.username, newUsername)
+                if (newUsername == ""){
+                    params.server.appendOutput(ServerOutput.usernameNotSpecifiedWhenSetting(params.clientID))
+                } else {
+
+                    val rooms = params.server.getRoomsByUser(params.user)
+
+                    val output = rooms.fold(listOf<ServerOutput>()) { out, room ->
+                        out + ServerOutput.userInRoomChangedUsernameMessage(params.user.username, newUsername, room.name)
+                    }
+
+                    params.server.changeUsername(params.user.username, newUsername).appendOutput(output)
+                }
             },
 
             ":admin" to {params ->
@@ -47,8 +58,43 @@ object Commands {
                 } else {
 
                     val roomName = params.argumentLine.trim().split(" ").getOrNull(0)?.trim() ?: ""
+                    val isUserAlreadyInside = params.server.getUsersInRoom(roomName).contains(params.user)
+                    val message = if (isUserAlreadyInside)
+                        ServerOutput.None
+                    else
+                        ServerOutput.userJoinedRoomMessage(params.user.username, roomName)
 
-                    params.server.addRoom(roomName).userJoinRoom(roomName, params.user.username)
+                    params.server.addRoom(roomName).userJoinRoom(roomName, params.user.username).appendOutput(message)
+                }
+            },
+
+            ":leave" to {params ->
+
+                if (params.room.name == Constants.defaultRoomName){
+                    params.server.appendOutput(ServerOutput.youCantLeaveTheMainRoomMessage(params.clientID))
+                } else {
+
+                    val output = ServerOutput.userLeftRoomMessage(params.user.username, params.room.name)
+
+                    params.server.userLeaveRoom(params.room.name, params.user.username).appendOutput(output)
+                }
+            },
+
+            ":kick" to {params ->
+
+                if (params.room.name == Constants.defaultRoomName){
+                    params.server.appendOutput(ServerOutput.youCantKickUsersFromTheMainRoomMessage(params.clientID))
+                } else {
+                    params.server.userLeaveRoom(params.room.name, params.user.username)
+                }
+            },
+
+            ":KICK" to {params ->
+
+                if (params.room.name == Constants.defaultRoomName){
+                    params.server.appendOutput(ServerOutput.youCantLeaveTheMainRoomMessage(params.clientID))
+                } else {
+                    params.server.userLeaveRoom(params.room.name, params.user.username)
                 }
             },
 
@@ -71,18 +117,21 @@ object Commands {
                 val message = if (arg == "all" && params.user.level == ChatUser.Level.ADMIN){
                     params.server.users.sortedBy { it.username }.fold("Users:\n") { s, user ->
                         val rooms = params.server.rooms.filter { it.isUserInRoom(user) } .fold(""){z, room ->
-                            z + room.name + " "
+                            z + room.name + "(" + room.permissions.getOrDefault(user, room.defaultPermission).name + ") "
                         }
                         s + user.username + " " + user.level.name + " in " + rooms + "\n"
                     }
                 } else if (arg == "details") {
-                    params.room.users.sortedBy { it.username }.fold("Users:\n") { s, user -> s + user.username + " " + user.level.name + "\n" }
+                    params.room.users.sortedBy { it.username }.fold("Users:\n") { s, user ->
+                        s + user.username + " " + user.level.name +
+                                "(" + params.room.permissions.getOrDefault(user, params.room.defaultPermission) + ")\n"
+                    }
                 } else {
                     params.room.users.sortedBy { it.username }.fold("Users:\n") { s, user -> s + user.username + "\n" }
                 }
 
 
-                params.server.appendOutput(ServerOutput.serviceMessageTo(params.clientID, message))
+                params.server.appendOutput(ServerOutput.serviceMessageTo(params.clientID, message.trim('\n')))
             },
 
             ":messages" to { params ->
@@ -104,9 +153,88 @@ object Commands {
                 }
 
 
-                params.server.appendOutput(ServerOutput.serviceMessageTo(params.clientID, message))
+                params.server.appendOutput(ServerOutput.serviceMessageTo(params.clientID, message.trim('\n')))
+            },
+
+
+            ":whitelist" to {params ->
+
+                val permissions = params.room.getPermissionsFor(params.user)
+
+                val command = params.argumentLine.trim().split(" ").getOrNull(0)?.trim() ?: ""
+
+                val argument = params.argumentLine.trim().split(" ").getOrNull(1)?.trim() ?: ""
+
+                if (command != "clear") {
+
+                    val userName = if (argument == "") command else argument
+
+                    val user = params.server.getUserByUsername(userName)
+
+                    if (user != null) {
+                        if (permissions >= ChatRoom.UserPermissions.ADMIN && params.user.level > ChatUser.Level.UNKNOWN) {
+                            val newRoom = if (argument == "" || command == "add")
+                                params.room.whitelistAdd(user)
+                            else if (command == "remove")
+                                params.room.whitelistRemove(user)
+                            else null
+
+                            if (newRoom != null)
+                                params.server.updateRoom(params.room, newRoom)
+                            else
+                                params.server.appendOutput(ServerOutput.unknownCommand(params.clientID, ":whitelist " + command))
+                        } else {
+
+                            params.server.appendOutput(ServerOutput.roomPermissionDenied(permissions, ChatRoom.UserPermissions.ADMIN, params.clientID))
+                        }
+                    } else {
+                        params.server.appendOutput(ServerOutput.userDoesNotExistsMessage(params.clientID))
+                    }
+                } else { //command == "clear"
+                    params.server.updateRoom(params.room, params.room.whitelistClear())
+                }
+
+            },
+
+
+            ":blacklist" to {params ->
+
+            val permissions = params.room.getPermissionsFor(params.user)
+
+            val command = params.argumentLine.trim().split(" ").getOrNull(0)?.trim() ?: ""
+
+            val argument = params.argumentLine.trim().split(" ").getOrNull(1)?.trim() ?: ""
+
+            if (command != "clear") {
+
+                val userName = if (argument == "") command else argument
+
+                val user = params.server.getUserByUsername(userName)
+
+                if (user != null) {
+                    if (permissions >= ChatRoom.UserPermissions.ADMIN && params.user.level > ChatUser.Level.UNKNOWN) {
+                        val newRoom = if (argument == "" || command == "add")
+                            params.room.blacklistAdd(user)
+                        else if (command == "remove")
+                            params.room.blacklistRemove(user)
+                        else null
+
+                        if (newRoom != null)
+                            params.server.updateRoom(params.room, newRoom)
+                        else
+                            params.server.appendOutput(ServerOutput.unknownCommand(params.clientID, ":blacklist " + command))
+                    } else {
+
+                        params.server.appendOutput(ServerOutput.roomPermissionDenied(permissions, ChatRoom.UserPermissions.ADMIN, params.clientID))
+                    }
+                } else {
+                    params.server.appendOutput(ServerOutput.userDoesNotExistsMessage(params.clientID))
+                }
+            } else { //command == "clear"
+                params.server.updateRoom(params.room, params.room.blacklistClear())
             }
 
+    }
 
 
     )

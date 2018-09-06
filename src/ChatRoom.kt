@@ -28,6 +28,11 @@ data class ChatRoom (val name: String,
     fun isUserInRoom(user: ChatUser): Boolean = users.contains(user)
 
     /**
+     * Return true if a user is in the room, false otherwise
+     */
+    fun isUsernameInRoom(username: String): Boolean = users.any {it.username == username}
+
+    /**
      * Returns a room with the specified greeting message to show when a user joins
      */
     fun setTopic(topic: String): ChatRoom {
@@ -64,6 +69,10 @@ data class ChatRoom (val name: String,
         return this.copy(name, permissions = permissions + Pair(user, permission))
     }
 
+    fun getPermissionsFor(user: ChatUser): UserPermissions{
+        return permissions.getOrDefault(user, defaultPermission)
+    }
+
     /**
      * A user granting permissions to another user with lower permissions
      */
@@ -84,8 +93,8 @@ data class ChatRoom (val name: String,
     fun whitelistAdd(user: ChatUser): ChatRoom = this.copy(name, whitelist = whitelist + user)
     fun blacklistRemove(user: ChatUser): ChatRoom = this.copy(name, blacklist = blacklist - user)
     fun whitelistRemove(user: ChatUser): ChatRoom = this.copy(name, whitelist = whitelist - user)
-    fun blacklistClear(user: ChatUser): ChatRoom = this.copy(name, blacklist = setOf())
-    fun whitelistClear(user: ChatUser): ChatRoom = this.copy(name, blacklist = setOf())
+    fun blacklistClear(): ChatRoom = this.copy(name, blacklist = setOf())
+    fun whitelistClear(): ChatRoom = this.copy(name, whitelist = setOf())
 
 
     fun canUserRead(user: ChatUser) : Boolean{
@@ -94,14 +103,6 @@ data class ChatRoom (val name: String,
 
     fun canUserWrite(user: ChatUser) : Boolean{
         return permissions.getOrDefault(user, defaultPermission) >= UserPermissions.VOICE
-    }
-
-    fun canUserKick(user: ChatUser) : Boolean{
-        return permissions.getOrDefault(user, defaultPermission) >= UserPermissions.MOD
-    }
-
-    fun canUserBan(user: ChatUser) : Boolean{
-        return permissions.getOrDefault(user, defaultPermission) >= UserPermissions.ADMIN
     }
 
     override fun hashCode(): Int {

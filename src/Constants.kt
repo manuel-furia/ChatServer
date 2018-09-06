@@ -11,5 +11,10 @@ object Constants {
     val defaultRoomPrefix = "room_"
     val commandPrefixes = listOf(":")
     val roomSelectionPrefix = "@"
+    val maxUserNameLength = 15
+    val maxRoomNameLength = 15
+    val roomAlignmentPadding = 8
+
+    val serverMessagePrefix = ":-"
 
 }

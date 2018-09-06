@@ -1,4 +1,4 @@
-import com.sun.xml.internal.ws.api.model.wsdl.WSDLBoundOperation
+import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const
 import java.net.ServerSocket
 import kotlin.concurrent.thread
 
@@ -57,6 +57,26 @@ class ChatServerListener (serverState: ChatServerState, val port: Int = 61673) :
         }
     }
 
+    private fun serviceMessageToClient(clientID: Long, msg: String): Unit {
+        val clientHandler = clients.inverse(clientID) //Get ClientHandler from its ID
+        if (clientHandler != null)
+            notifyObserver(
+                    clientHandler,
+                    ServerMessageEvent(
+                            ServerMessageEvent.Action.MESSAGE,
+                            serverMessageFormat(msg)
+                    )
+            )
+    }
+
+    private fun serverMessageFormat(msg: String): String{
+        if (msg.contains('\n')){
+            return Constants.serverMessagePrefix + " " + msg.replace("\n", "\n" + Constants.serverMessagePrefix + " ") + "\n"
+        } else {
+            return Constants.serverMessagePrefix + " " + msg + "\n"
+        }
+    }
+
     /**
      * Takes the output of a server state and executes the list of pending actions that it contains
      * Once executed, the current server state is replaced with a new one without pending actions
@@ -75,15 +95,14 @@ class ChatServerListener (serverState: ChatServerState, val port: Int = 61673) :
                         notifyObserver(clientHandler, ServerMessageEvent(ServerMessageEvent.Action.STOP))}
                 is ServerOutput.BanClient -> {}
                 is ServerOutput.LiftBan -> {}
-                is ServerOutput.ServiceMessageToClient -> {
-                    val clientHandler = clients.inverse(output.clientID) //Get ClientHandler from its ID
-                    if (clientHandler != null)
-                        notifyObserver(
-                                clientHandler,
-                                //Note: Replacing " from " to " From " is necessary as, by specification, server messages are unmarked
-                                //      making the absence of " from " the only way to distinguish them from user messages
-                                ServerMessageEvent(ServerMessageEvent.Action.MESSAGE, output.msg.replace(" from ", " From "))
-                        )
+                is ServerOutput.ServiceMessageToClient -> serviceMessageToClient(output.clientID, output.msg)
+                is ServerOutput.ServiceMessageToRoom -> {
+                    serverState.getClientIDsInRoom(output.roomName).forEach {
+                        serviceMessageToClient(it, Constants.roomSelectionPrefix + output.roomName + " " + output.msg)
+                    }
+                }
+                is ServerOutput.ServiceMessageToEverybody -> {
+                    notifyObservers(ServerMessageEvent(ServerMessageEvent.Action.MESSAGE, serverMessageFormat(output.msg)))
                 }
                 is ServerOutput.MessageFromUserToRoom -> {
                     val roomName = output.message.room.name
@@ -93,7 +112,7 @@ class ChatServerListener (serverState: ChatServerState, val port: Int = 61673) :
                         if (client != null)
                             notifyObserver(
                                     client,
-                                    ServerMessageEvent(ServerMessageEvent.Action.MESSAGE, output.message.toTextMessage() + "\n")
+                                    ServerMessageEvent(ServerMessageEvent.Action.MESSAGE, output.message.toFormattedMessage() + "\n")
                             )
                     }
                 }

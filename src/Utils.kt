@@ -1,7 +1,7 @@
 object Utils {
 
     fun produceValidRoomName(name: String): String {
-        val filtered = name.split(" ")[0].filter {it.isLetterOrDigit() || it == '_'}
+        val filtered = name.split(" ")[0].filter {it.isLetterOrDigit() || it == '_'}.take(Constants.maxUserNameLength)
 
         if (filtered.length <= 0 || filtered[0].isDigit() || filtered == Constants.defaultRoomName)
             return Constants.defaultRoomPrefix + filtered
@@ -10,7 +10,7 @@ object Utils {
     }
 
     fun produceValidUsername(username: String): String {
-        val filtered = username.split(" ")[0].filter {it.isLetterOrDigit() || it == '_'}
+        val filtered = username.split(" ")[0].filter {it.isLetterOrDigit() || it == '_'}.take(Constants.maxRoomNameLength)
 
         if (filtered.length <= 0 || filtered[0].isDigit() || filtered == Constants.serverMessageUserName)
             return Constants.defaultUsernamePrefix + filtered

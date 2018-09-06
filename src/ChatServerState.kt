@@ -139,7 +139,7 @@ data class ChatServerState (
         val room = rooms.find { it.name == roomName }
 
         if (room != null)
-            return this.copy(rooms = (rooms - room) + room.setTopic(topic))
+            return this.updateRoom(room, room.setTopic(topic))
         else
             return this
     }
@@ -190,6 +190,12 @@ data class ChatServerState (
         }
     }
 
+    fun getRoomsByUsername(username: String): Set<ChatRoom> = rooms.filter { it.isUsernameInRoom(username) }.toSet()
+
+    fun getRoomsByUser(user: ChatUser): Set<ChatRoom> = rooms.filter { it.isUserInRoom(user) }.toSet()
+
+    fun getRoomByName(name: String): ChatRoom? = rooms.find { it.name == name }
+
     fun getUserByUsername(username: String): ChatUser? = users.find { it.username == username }
 
     fun userToClientID(user: ChatUser): Long? = usersAndIds.direct(user)
@@ -221,7 +227,7 @@ data class ChatServerState (
             roomObj to content
         } else {
             val content = message
-            val roomObj = rooms.find { it.name == Constants.defaultRoomName } ?: return this.serverErrorTo("Server error: Cannot find default room\n", clientID)
+            val roomObj = rooms.find { it.name == Constants.defaultRoomName } ?: return this.serverErrorTo("Server error: Cannot find default room", clientID)
             roomObj to content
         }
 
@@ -275,6 +281,16 @@ data class ChatServerState (
 
     fun updateUsers(users: Set<ChatUser>): ChatServerState {
         return this.copy(users = users)
+    }
+
+    fun updateRoom(room: ChatRoom, newRoom: ChatRoom): ChatServerState {
+        return this.copy(rooms = (rooms - room) + newRoom)
+    }
+
+    fun updateUser(user: ChatUser, newUser: ChatUser): ChatServerState {
+        val newRooms = rooms.map {it.userLeave(user)}.toSet()
+
+        return this.copy(users = (users - user) + newUser, rooms = newRooms)
     }
 
 

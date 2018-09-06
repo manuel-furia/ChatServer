@@ -1,3 +1,4 @@
+import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const
 import java.sql.Timestamp
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -23,6 +24,24 @@ class ChatHistory private constructor(history: List<Entry>) {
         /**
          * Returns the message without information on the time it was received, as string
          */
+        fun toFormattedMessage(noTime: Boolean = false): String {
+            val date = Date(timestamp)
+            val timeFormat = SimpleDateFormat("HH:mm:ss")
+            val timeString = timeFormat.format(date)
+
+            return if (noTime) "" else "[$timeString] " + (user.username + ": ") + message
+        }
+
+        /**
+         * Returns the complete message data for client parsing
+         */
+        fun toDataMessage(): String {
+            return Constants.defaultRoomPrefix + room.name + "T" + timestamp + "+" + user + " " + message
+        }
+
+        /**
+         * Returns the message without information on the time it was received, as string
+         */
         fun toTextMessage(): String {
             if (room.name == Constants.defaultRoomName)
                 return message + " from " + user.username
@@ -35,17 +54,18 @@ class ChatHistory private constructor(history: List<Entry>) {
          */
         fun toExtendedTextMessage(): String {
             val date = Date(timestamp)
-            val dateFormat = SimpleDateFormat("yyyy-MM-dd")
+            val dateFormat = SimpleDateFormat("dd-MM-yyyy")
             val timeFormat = SimpleDateFormat("HH:mm:ss.SSS")
             val dateString = dateFormat.format(date)
             val timeString = timeFormat.format(date)
 
             assert(dateString != null)
 
-            if (room.name == Constants.defaultRoomName)
-                return message + " from " + user.username + " at " + dateString + "T" + timeString
-            else
-                return message + " from " + user.username + " at " + dateString + "T" + timeString + " to " + room.name
+            return Constants.roomSelectionPrefix +
+                    room.name.padEnd(Constants.roomAlignmentPadding, ' ') +
+                    " [$dateString $timeString] " +
+                    (user.username + ": ") +
+                    message
         }
     }
 
