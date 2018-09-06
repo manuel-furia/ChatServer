@@ -68,6 +68,33 @@ object Commands {
                 }
             },
 
+            ":schedule" to {params ->
+
+                if (params.user.level < ChatUser.Level.NORMAL) {
+
+                    params.server.appendOutput(ServerOutput.permissionDenied(params.user.level, ChatUser.Level.NORMAL, params.clientID))
+
+                } else {
+
+                    val timeAsString = params.argumentLine.trim().split(" ").getOrNull(0) ?: ""
+                    val action = params.argumentLine.drop(timeAsString.length + 1)
+                    val time = timeAsString.toIntOrNull()
+
+                    if (time != null){
+                        if (params.user.level < ChatUser.Level.ADMIN && time > Constants.maxNonAdminSchedule) {
+                            params.server.appendOutput(ServerOutput.Schedule(System.currentTimeMillis() + time*1000, action, params.user))
+                        } else {
+                            params.server.appendOutput(ServerOutput.unknownCommand(params.clientID, ":schedule " + params.argumentLine))
+                        }
+
+
+
+                    } else {
+                        params.server.appendOutput(ServerOutput.unknownCommand(params.clientID, ":schedule " + params.argumentLine))
+                    }
+                }
+            },
+
             ":leave" to {params ->
 
                 if (params.room.name == Constants.defaultRoomName){
@@ -82,27 +109,67 @@ object Commands {
 
             ":kick" to {params ->
 
-                if (params.room.name == Constants.defaultRoomName){
-                    params.server.appendOutput(ServerOutput.youCantKickUsersFromTheMainRoomMessage(params.clientID))
+                val permissions = params.room.getPermissionsFor(params.user)
+
+                if (permissions >= ChatRoom.UserPermissions.MOD) {
+
+                    val username = params.argumentLine.trim().split(" ").getOrNull(0)?.trim() ?: ""
+                    val user = params.server.getUserByUsername(username)
+
+                    if (user == null) {
+                        params.server.appendOutput(ServerOutput.userDoesNotExistsMessage(params.clientID))
+                    } else {
+                        if (params.room.name == Constants.defaultRoomName) {
+                            params.server.appendOutput(ServerOutput.youCantKickUsersFromTheMainRoomMessage(params.clientID))
+                        } else {
+                            val messageToRoom = ServerOutput.kickedFromRoom(user.username, params.room.name)
+                            val messageToKicked = ServerOutput.youHaveBeenKickedFromRoom(user.username)
+                            params.server
+                                    .userLeaveRoom(params.room.name, user.username)
+                                    .appendOutput(listOf(messageToRoom, messageToKicked))
+                        }
+                    }
                 } else {
-                    params.server.userLeaveRoom(params.room.name, params.user.username)
+                    params.server.appendOutput(ServerOutput.roomPermissionDenied(permissions, ChatRoom.UserPermissions.MOD, params.clientID))
+                }
+            },
+/*
+            ":KICK" to {params ->
+
+                val username = params.argumentLine.trim().split(" ").getOrNull(0)?.trim() ?: ""
+                val user = params.server.getUserByUsername(username)
+
+                if (params.user.level >= ChatUser.Level.ADMIN && user != null){
+                    val clientID = params.server.userToClientID(user)
+
+                    params.server.appendOutput(ServerOutput.DropClient(clientID))
+                } else {
+                    params.server
                 }
             },
 
-            ":KICK" to {params ->
+            ":BAN" to {params ->
+
+
 
                 if (params.room.name == Constants.defaultRoomName){
                     params.server.appendOutput(ServerOutput.youCantLeaveTheMainRoomMessage(params.clientID))
                 } else {
                     params.server.userLeaveRoom(params.room.name, params.user.username)
                 }
-            },
+            },*/
 
             ":topic" to {params ->
 
                 val topic = params.argumentLine.trim()
 
-                params.server.setRoomTopic(params.room.name, topic)
+                val permissions = params.room.getPermissionsFor(params.user)
+
+                if (permissions >= ChatRoom.UserPermissions.MOD) {
+                    params.server.setRoomTopic(params.room.name, topic)
+                } else {
+                    params.server.appendOutput(ServerOutput.roomPermissionDenied(permissions, ChatRoom.UserPermissions.MOD, params.clientID))
+                }
             },
 
             ":quit" to { params ->
@@ -195,7 +262,6 @@ object Commands {
                 }
 
             },
-
 
             ":blacklist" to {params ->
 

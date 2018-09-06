@@ -14,6 +14,8 @@ class ClientHandler(val uid: Long, tcpClient: Socket, observer: Observer<ClientM
     var running: Boolean = false
     private set
 
+    val inetAddress = tcpClient.inetAddress.hostAddress
+
     init {
         observable.registerObserver(this)
     }
@@ -51,6 +53,7 @@ class ClientHandler(val uid: Long, tcpClient: Socket, observer: Observer<ClientM
             ServerMessageEvent.Action.MESSAGE -> if (event.msg != null) send(event.msg)
             ServerMessageEvent.Action.PING -> send("TODO: Implement ping")
             ServerMessageEvent.Action.STOP -> stop()
+            ServerMessageEvent.Action.TIMEOUT -> stop()
             else -> serverError(event.msg ?: "")
         }
     }

@@ -14,6 +14,8 @@ sealed class ServerOutput {
 
     class LiftBan(val bannedIP: String): ServerOutput()
 
+    class Schedule(val timestamp: Long, val action: String, val user: ChatUser): ServerOutput()
+
     class MessageFromUserToRoom(val message: ChatHistory.Entry): ServerOutput()
 
     class Ping(val clientID: Long): ServerOutput()
@@ -96,6 +98,10 @@ sealed class ServerOutput {
                     "Error: User can not join the room because already joined or lacking permissions.",
                     clientID)
 
+        fun nonAdminCannotScheduleLaterThanMessage(clientID: Long) = ServiceMessageToClient(
+                "Error: Only ADMIN users can schedule actions later than ${Constants.maxNonAdminSchedule} seconds from now.",
+                clientID)
+
         fun userCannotAddressRoomMessage(room: String, clientID: Long) = ServiceMessageToClient(
                 "Error: you did not join the room ${room}. Use :room ${room}",
                 clientID)
@@ -104,6 +110,16 @@ sealed class ServerOutput {
                     "You have been banned" + if (duration < 0) "." else " for $duration minutes.",
                     clientID
             )
+
+        fun kickedFromRoom(username: String, roomName: String) = ServiceMessageToRoom (
+                "User $username has been kicked.",
+                roomName
+        )
+
+        fun youHaveBeenKickedFromRoom(roomName: String) = ServiceMessageToRoom (
+                "You have been kicked from room $roomName.",
+                roomName
+        )
 
         fun unknownCommand(clientID: Long, command: String) = ServiceMessageToClient (
                 "Did not get it $command",

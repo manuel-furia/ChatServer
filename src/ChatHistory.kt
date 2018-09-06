@@ -26,7 +26,7 @@ class ChatHistory private constructor(history: List<Entry>) {
          */
         fun toFormattedMessage(noTime: Boolean = false): String {
             val date = Date(timestamp)
-            val timeFormat = SimpleDateFormat("HH:mm:ss")
+            val timeFormat = SimpleDateFormat("HH:mm")
             val timeString = timeFormat.format(date)
 
             return if (noTime) "" else "[$timeString] " + (user.username + ": ") + message
@@ -36,7 +36,7 @@ class ChatHistory private constructor(history: List<Entry>) {
          * Returns the complete message data for client parsing
          */
         fun toDataMessage(): String {
-            return Constants.defaultRoomPrefix + room.name + "T" + timestamp + "+" + user + " " + message
+            return Constants.defaultRoomPrefix + room.name + "$" + timestamp + "+" + user + " " + message
         }
 
         /**

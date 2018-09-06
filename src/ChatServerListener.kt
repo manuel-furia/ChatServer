@@ -1,4 +1,3 @@
-import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const
 import java.net.ServerSocket
 import kotlin.concurrent.thread
 
@@ -16,18 +15,28 @@ class ChatServerListener (serverState: ChatServerState, val port: Int = 61673) :
     /**
      * Last used ID for a client
      */
-    var currentID: Long = 1
+    private var currentID: Long = 1
 
     /**
-     * Clients <-> ID bijection
+     * Clients <-> ClientStatus bijection
      */
-    var clients: Bijection<Observer<ServerMessageEvent>, Long> = BijectionMap()
+    private var clients: Bijection<Observer<ServerMessageEvent>, Long> = BijectionMap()
+
+    /**
+     * clientId to timestamp of last ping
+     */
+    private val lastPings: MutableMap<Long, Long> = mutableMapOf()
+
+    private var schedule: List<ServerOutput.Schedule> = listOf()
 
     fun listen(){
         try {
             //Listen to the specified port
             val socket = ServerSocket(port)
             println("Server is running on port ${socket.localPort}")
+
+            //Run a timer for scheduling
+            thread { this.timer() }
 
             while (true) {
                 //Wait for the next client that will connect, accepting it when it does
@@ -69,6 +78,12 @@ class ChatServerListener (serverState: ChatServerState, val port: Int = 61673) :
             )
     }
 
+    private fun serviceMessageToRoom(roomName: String, msg: String): Unit {
+        serverState.getClientIDsInRoom(roomName).forEach {
+            serviceMessageToClient(it, Constants.roomSelectionPrefix + roomName + " " + msg)
+        }
+    }
+
     private fun serverMessageFormat(msg: String): String{
         if (msg.contains('\n')){
             return Constants.serverMessagePrefix + " " + msg.replace("\n", "\n" + Constants.serverMessagePrefix + " ") + "\n"
@@ -96,11 +111,7 @@ class ChatServerListener (serverState: ChatServerState, val port: Int = 61673) :
                 is ServerOutput.BanClient -> {}
                 is ServerOutput.LiftBan -> {}
                 is ServerOutput.ServiceMessageToClient -> serviceMessageToClient(output.clientID, output.msg)
-                is ServerOutput.ServiceMessageToRoom -> {
-                    serverState.getClientIDsInRoom(output.roomName).forEach {
-                        serviceMessageToClient(it, Constants.roomSelectionPrefix + output.roomName + " " + output.msg)
-                    }
-                }
+                is ServerOutput.ServiceMessageToRoom -> serviceMessageToRoom(output.roomName, output.msg)
                 is ServerOutput.ServiceMessageToEverybody -> {
                     notifyObservers(ServerMessageEvent(ServerMessageEvent.Action.MESSAGE, serverMessageFormat(output.msg)))
                 }
@@ -121,17 +132,27 @@ class ChatServerListener (serverState: ChatServerState, val port: Int = 61673) :
                     if (clientHandler != null)
                         notifyObserver(clientHandler, ServerMessageEvent(ServerMessageEvent.Action.PING))
                 }
+                is ServerOutput.Schedule -> synchronized(this){schedule = schedule + output}
                 is ServerOutput.None -> {} //No action
             }
         }
 
         //As the current output has been handled, create a new state with no output
-        serverState = serverState.updateOutput(listOf())
+        synchronized(this) {
+            serverState = serverState.updateOutput(listOf())
+        }
     }
 
-    @Synchronized override fun update(event: ClientMessageEvent) {
+    override fun update(event: ClientMessageEvent) {
         //Handle messages from client
-        serverState = serverState.processIncomingMessageFromClient(event.sender.uid, event.msg)
+        synchronized (this) {
+            if (event.msg.startsWith(Constants.pingString) && event.msg.length <= Constants.pingString.length + System.lineSeparator().length){
+                lastPings.put(event.sender.uid, System.currentTimeMillis()) //Just received a ping
+            } else {
+                lastPings.put(event.sender.uid, System.currentTimeMillis()) //Consider a message as a ping
+                serverState = serverState.processIncomingMessageFromClient(event.sender.uid, event.msg)
+            }
+        }
 
         //Execute the server output
         processOutputFromServer(serverState.currentOutput)
@@ -164,5 +185,57 @@ class ChatServerListener (serverState: ChatServerState, val port: Int = 61673) :
     override fun notifyObserver(observer: Observer<ServerMessageEvent>, event: ServerMessageEvent) {
         observer.update(event)
     }
+
+    private fun timer(resolutionMillis: Long = 1000){
+
+        var pingsLastCkeckedMillisAgo = 0L
+
+        while (true) {
+            synchronized(this) {
+                val timestamp = System.currentTimeMillis()
+                if (schedule.size > 0) {
+                    val elapsed = schedule.filter { it.timestamp <= timestamp }
+                    elapsed.forEach {
+                        serverState = serverState.processIncomingMessageFromClient(-1, it.action, userOverride = it.user)
+                        processOutputFromServer(serverState.currentOutput)
+                    }
+                    schedule = schedule - elapsed
+                }
+            }
+
+            Thread.sleep(resolutionMillis)
+            pingsLastCkeckedMillisAgo += resolutionMillis
+
+            if (pingsLastCkeckedMillisAgo >= Constants.pingTimeoutCheckEverySeconds * 1000){
+                checkPings()
+                pingsLastCkeckedMillisAgo = 0
+            }
+        }
+
+
+    }
+
+    private fun checkPings(){
+        //Add clients that just joined to the lastPings table
+        clients.codomainEntries.forEach {
+            if (!lastPings.containsKey(it)) lastPings.put(it, System.currentTimeMillis())
+        }
+
+        lastPings.entries.forEach{
+            if (System.currentTimeMillis() - it.value > Constants.pingTimeoutAfterSeconds * 1000){
+                val clientHandler = clients.inverse(it.key) //Get ClientHandler from its ID
+                if (clientHandler != null){
+                    val user = serverState.clientIDToUser(it.key)
+                    notifyObserver(clientHandler, ServerMessageEvent(ServerMessageEvent.Action.TIMEOUT))
+                    if (user != null) {
+                        serverState.getRoomsByUser(user).forEach {
+                            serviceMessageToRoom(it.name,"User ${user.username} timeout.")
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 
 }

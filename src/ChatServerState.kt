@@ -200,6 +200,8 @@ data class ChatServerState (
 
     fun userToClientID(user: ChatUser): Long? = usersAndIds.direct(user)
 
+    fun clientIDToUser(user: Long): ChatUser? = usersAndIds.inverse(user)
+
     fun addBannedIP(ip: String): ChatServerState = this.copy(bannedIPs = bannedIPs + ip)
 
     fun liftBan(ip: String): ChatServerState = this.copy(bannedIPs = bannedIPs - ip)
@@ -217,12 +219,13 @@ data class ChatServerState (
         return this
     }
 
-    fun processIncomingMessageFromClient(clientID: Long, message: String): ChatServerState {
-        val user = usersAndIds.inverse(clientID) ?: ChatUser("", ChatUser.Level.UNKNOWN)
+    fun processIncomingMessageFromClient(clientID: Long, message: String, userOverride: ChatUser? = null): ChatServerState {
+        val user = userOverride ?: (usersAndIds.inverse(clientID) ?: ChatUser("", ChatUser.Level.UNKNOWN))
+        val responseCliendID = usersAndIds.direct(user) ?: clientID
 
         val (room, content) = if (message.startsWith(Constants.roomSelectionPrefix)) {
             val roomName =  message.drop(Constants.roomSelectionPrefix.length).split(" ").getOrNull(0) ?: Constants.defaultRoomName
-            val roomObj = rooms.find { it.name == roomName } ?: return appendOutput(ServerOutput.roomDoesNotExistsMessage(roomName, clientID))
+            val roomObj = rooms.find { it.name == roomName } ?: return appendOutput(ServerOutput.roomDoesNotExistsMessage(roomName, responseCliendID))
             val content = message.drop(Constants.roomSelectionPrefix.length + roomName.length + 1) //Drop the room name plus the space following it
             roomObj to content
         } else {
@@ -232,8 +235,8 @@ data class ChatServerState (
         }
 
         //Can the user address the specified room? (Only if they joined it, or if its the default server room)
-        if (room.name != Constants.defaultRoomName && !room.isUserInRoom(user))
-            return appendOutput(ServerOutput.userCannotAddressRoomMessage(room.name, clientID))
+        if (room.name != Constants.defaultRoomName && !room.isUserInRoom(user) && userOverride == null)
+            return appendOutput(ServerOutput.userCannotAddressRoomMessage(room.name, responseCliendID))
 
         val result = Interpreter(content, this, user, room).result
 
