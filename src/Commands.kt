@@ -1,4 +1,7 @@
-import com.sun.org.apache.regexp.internal.RE
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.ZoneId
+
 
 object Commands {
 
@@ -19,11 +22,9 @@ object Commands {
 
                     val historyEntry = ChatHistory.Entry(params.argumentLine, params.user, params.room, timestamp)
 
-                    val newHistory = params.server.messageHistory.addEntry(historyEntry)
-
                     val output = ServerOutput.MessageFromUserToRoom(historyEntry)
 
-                    params.server.copy(currentOutput = listOf(output), messageHistory = newHistory)
+                    params.server.appendMessageHistory(historyEntry).appendOutput(output)
 
                 } else {
                     params.server.appendOutput(ServerOutput.roomPermissionDenied(permissions, ChatRoom.UserPermissions.VOICE, params.clientID))
@@ -290,27 +291,87 @@ object Commands {
                 params.server.appendOutput(ServerOutput.serviceMessageTo(params.clientID, message.trim('\n')))
             },
 
+            ":rooms" to { params ->
+
+                val rooms = if (params.user.level >= ChatUser.Level.ADMIN) {
+                    params.server.rooms
+                } else {
+                    //Show only rooms without whitelist to normal users
+                    params.server.rooms.filter { it.whitelist.size == 0 }
+                }
+
+
+                val message = rooms.fold("Rooms: "){s, r -> s + '\n' + r.name}
+
+                params.server.appendOutput(ServerOutput.serviceMessageTo(params.clientID, message))
+            },
+
             ":messages" to { params ->
 
-                val arg = params.argumentLine.trim()
+                val (arg, formatAsData) = if (params.argumentLine.startsWith("data"))
+                        Pair(params.argumentLine.drop("data".length+1).trim(), true)
+                    else
+                        Pair(params.argumentLine.trim(), false)
 
                 val permissions = params.room.getPermissionsFor(params.user)
 
+                val formatFunc = {s: String, msg: ChatHistory.Entry ->
+                    s + (if (formatAsData) msg.toDataMessage() else msg.toExtendedTextMessage()) + "\n"
+                }
+
                 if (permissions >= ChatRoom.UserPermissions.READ) {
 
-                    val message = if (arg == "all" && params.user.level == ChatUser.Level.ADMIN) {
-                        params.server.messageHistory.getAll().fold("Messages:\n") { s, msg ->
-                            s + msg.toExtendedTextMessage() + "\n"
-                        }
-                    } else if (arg == "details") {
-                        params.server.messageHistory.query(room = params.room).fold("Messages:\n") { s, msg ->
-                            s + msg.toExtendedTextMessage() + "\n"
-                        }
+                    val messages = if (arg == "all" && params.user.level == ChatUser.Level.ADMIN) {
+                        params.server.messageHistory.getAll()
                     } else {
-                        params.server.messageHistory.query(room = params.room).fold("Messages:\n") { s, msg ->
-                            s + msg.toExtendedTextMessage() + "\n"
-                        }
+                        params.server.messageHistory.query(room = params.room).getAll()
                     }
+
+                    val message = messages.fold("Messages:\n", formatFunc)
+
+                    params.server.appendOutput(ServerOutput.serviceMessageTo(params.clientID, message.trim('\n')))
+
+                }else {
+                    params.server.appendOutput(ServerOutput.roomPermissionDenied(permissions, ChatRoom.UserPermissions.READ, params.clientID))
+                }
+
+            },
+
+            ":query" to { params ->
+
+                val (arg, formatAsData) = if (params.argumentLine.startsWith("data"))
+                    Pair(params.argumentLine.drop("data".length+1).trim(), true)
+                else
+                    Pair(params.argumentLine.trim(), false)
+
+                val permissions = params.room.getPermissionsFor(params.user)
+
+                val formatFunc = {s: String, msg: ChatHistory.Entry ->
+                    s + (if (formatAsData) msg.toDataMessage() else msg.toExtendedTextMessage()) + "\n"
+                }
+
+                val queryMap = mapOf(*(arg
+                        .split(";")
+                        .map {x -> x.split("=")}
+                        .filter { x -> x.size == 2 }
+                        .map {it[0] to it[1]}).toTypedArray())
+
+                if (permissions >= ChatRoom.UserPermissions.READ) {
+
+                    val messages = if (params.user.level == ChatUser.Level.ADMIN) {
+                        params.server.messageHistory
+                    } else {
+                        params.server.messageHistory.query(room = params.room)
+                    }
+
+                    val start = getTimestampIfPossible(queryMap.get("start"), true)?.toString()
+                    val end = getTimestampIfPossible(queryMap.get("end"), false)?.toString()
+
+
+                    val queryResult = messages.query(queryMap.get("text"), queryMap.get("user"), queryMap.get("room"), start, end)
+
+                    val message = queryResult.getAll().fold("Query result:\n", formatFunc)
+
                     params.server.appendOutput(ServerOutput.serviceMessageTo(params.clientID, message.trim('\n')))
 
                 }else {
@@ -490,6 +551,40 @@ object Commands {
     )
 
     val allCommands = basicCommands
+
+    private fun getTimestampIfPossible(time: String?, isStart: Boolean = false): Long? {
+
+        if (time == null) return null
+
+        val (timeString, dateString) = Pair (
+                time.split(",").getOrNull(0) ?: "",
+                time.split(",").getOrNull(1) ?: ""
+        )
+
+        val now = LocalDateTime.now()
+        val defaultTime = if (isStart)
+            now.minusMinutes(Constants.defaultQueryMinutesAgo.toLong())
+        else
+            now
+
+        val (hh, mm) = Pair (
+                timeString.split(":").getOrNull(0)?.toIntOrNull() ?: defaultTime.minute,
+                timeString.split(":").getOrNull(1)?.toIntOrNull() ?: defaultTime.hour
+        )
+
+        val (day, month, year) = Triple (
+                dateString.split(".", "/", "\\").getOrNull(0)?.toIntOrNull() ?: now.dayOfMonth,
+                dateString.split(".", "/", "\\").getOrNull(1)?.toIntOrNull() ?: now.monthValue,
+                dateString.split(".", "/", "\\").getOrNull(1)?.toIntOrNull() ?: now.year
+        )
+
+        try { //LocalDateTime can throw exceptions if the format is wrong
+            return LocalDateTime.of(year, month, day, hh, mm)?.atZone(ZoneId.systemDefault())?.toInstant()?.toEpochMilli()
+        } catch (ex: Exception){
+            return null
+        }
+
+    }
 
     private fun getPvtRoom(server: ChatServerState, userA: ChatUser, userB: ChatUser): Pair<ChatServerState, ChatRoom?> {
         val maybePvtRoomName = listOf<String>(userA.username, userB.username)

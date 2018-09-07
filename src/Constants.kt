@@ -18,5 +18,6 @@ object Constants {
     const val pingTimeoutAfterSeconds = 240
     const val serverMessagePrefix = ":-"
     const val pingString = ":PING:"
+    const val defaultQueryMinutesAgo = 10
 
 }
