@@ -6,7 +6,7 @@ object Utils {
                 .filter {it.isLetterOrDigit() || it == '_' || it == Constants.pvtRoomUsernameSeperator}
                 .take(Constants.maxUserNameLength)
 
-        if (filtered.length <= 0 || filtered[0].isDigit() || filtered == Constants.defaultRoomName)
+        if (filtered.length <= 0 || filtered[0].isDigit() || filtered == Constants.mainRoomName)
             return Constants.defaultRoomPrefix + filtered
         else
             return filtered

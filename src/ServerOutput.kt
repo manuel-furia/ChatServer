@@ -8,6 +8,14 @@ sealed class ServerOutput {
 
     class ServiceMessageToEverybody(val msg: String): ServerOutput()
 
+    class UserJoinedNotification(val user: String): ServerOutput()
+
+    class UserNameChangedNotification(val user: String): ServerOutput()
+
+    class KnownUserLeftNotification(val user: String): ServerOutput()
+
+    class UnknownUserLeftNotification(val user: String): ServerOutput()
+
     class DropClient(val clientID: Long): ServerOutput()
 
     class BanClient(val clientID: Long): ServerOutput()

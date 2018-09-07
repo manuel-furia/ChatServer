@@ -40,17 +40,11 @@ class ChatServerListener (serverState: ChatServerState, val port: Int = 61673) :
 
 
 
-    fun listen(){
+    fun listen(topChatterBot: Boolean = false){
         try {
             //Listen to the specified port
             val socket = ServerSocket(port)
             println("Server is running on port ${socket.localPort}")
-
-            //Run a timer for scheduling
-            thread { this.timer() }
-
-            //Run the server console
-            thread { serverConsole.run() }
 
             //Register the server console as a user
             serverState = serverState.registerUser(
@@ -60,6 +54,32 @@ class ChatServerListener (serverState: ChatServerState, val port: Int = 61673) :
 
             //Process the output from the registration of the new user
             processOutputFromServer(serverState.currentOutput)
+
+            if (topChatterBot){
+                //Register the "TopChatter" bot as a client
+                val topChatter = TopChatter(this, this)
+                clients = clients + (topChatter to currentID)
+
+                serverState = serverState.registerUser(
+                        "TopChatter",
+                        currentID,
+                        ChatUser.Level.NORMAL)
+                        .userJoinRoom(Constants.mainRoomName, "TopChatter")
+
+                currentID += 1
+
+                //Process the output from the registration of the new user
+                processOutputFromServer(serverState.currentOutput)
+
+                //Run the TopChatter bot
+                thread { topChatter.run() }
+            }
+
+            //Run a timer for scheduling
+            thread { this.timer() }
+
+            //Run the server console
+            thread { serverConsole.run() }
 
 
             while (true) {
@@ -116,6 +136,7 @@ class ChatServerListener (serverState: ChatServerState, val port: Int = 61673) :
                     it,
                     ServerMessageEvent(
                             ServerMessageEvent.Action.MESSAGE,
+                            serverState,
                             serverMessageFormat(msg)
                     )
             )
@@ -126,6 +147,21 @@ class ChatServerListener (serverState: ChatServerState, val port: Int = 61673) :
         serverState.getClientIDsInRoom(roomName).forEach {
             serviceMessageToClient(it, Constants.roomSelectionPrefix + roomName + " " + msg)
         }
+    }
+
+    private fun messageFromUserToRoom(message: ChatHistory.Entry): Unit {
+        serverState
+                .getUsersInRoom(message.room.name)
+                .filter { message.room.canUserRead(it) }
+                .mapNotNull{ serverState.userToClientID(it) }
+                .forEach {id ->
+                    fetchServerMessageObserver(id) {
+                        notifyObserver(
+                                it,
+                                ServerMessageEvent(ServerMessageEvent.Action.MESSAGE, serverState, message.toFormattedMessage() + "\n")
+                        )
+                    }
+                }
     }
 
     private fun serverMessageFormat(msg: String): String{
@@ -150,7 +186,7 @@ class ChatServerListener (serverState: ChatServerState, val port: Int = 61673) :
             when (output){
                 is ServerOutput.DropClient -> {
                     fetchServerMessageObserver (output.clientID) {
-                        notifyObserver(it, ServerMessageEvent(ServerMessageEvent.Action.STOP))
+                        notifyObserver(it, ServerMessageEvent(ServerMessageEvent.Action.STOP, serverState))
                     }
                 }
                 is ServerOutput.BanClient -> {
@@ -162,28 +198,28 @@ class ChatServerListener (serverState: ChatServerState, val port: Int = 61673) :
                 is ServerOutput.ServiceMessageToClient -> serviceMessageToClient(output.clientID, output.msg)
                 is ServerOutput.ServiceMessageToRoom -> serviceMessageToRoom(output.roomName, output.msg)
                 is ServerOutput.ServiceMessageToEverybody -> {
-                    notifyObservers(ServerMessageEvent(ServerMessageEvent.Action.MESSAGE, serverMessageFormat(output.msg)))
+                    notifyObservers(ServerMessageEvent(ServerMessageEvent.Action.MESSAGE, serverState, serverMessageFormat(output.msg)))
                 }
                 is ServerOutput.MessageFromUserToRoom -> {
-                    val roomName = output.message.room.name
                     //Send the messages only to clients of users that are members of the target room and have at least READ permissions
-                    serverState
-                            .getUsersInRoom(roomName)
-                            .filter { output.message.room.canUserRead(it) }
-                            .mapNotNull{ serverState.userToClientID(it) }
-                            .forEach {id ->
-                                fetchServerMessageObserver(id) {
-                                    notifyObserver(
-                                        it,
-                                        ServerMessageEvent(ServerMessageEvent.Action.MESSAGE, output.message.toFormattedMessage() + "\n")
-                                )
-                             }
-                    }
+                    messageFromUserToRoom(output.message)
                 }
                 is ServerOutput.Ping -> {
                     fetchServerMessageObserver(output.clientID) {
-                        notifyObserver(it, ServerMessageEvent(ServerMessageEvent.Action.PING))
+                        notifyObserver(it, ServerMessageEvent(ServerMessageEvent.Action.PING, serverState))
                     }
+                }
+                is ServerOutput.UserJoinedNotification -> {
+                    notifyObservers(ServerMessageEvent(ServerMessageEvent.Action.USER_JOINED, serverState, output.user))
+                }
+                is ServerOutput.KnownUserLeftNotification -> {
+                    notifyObservers(ServerMessageEvent(ServerMessageEvent.Action.KNOWN_USER_LEFT, serverState, output.user))
+                }
+                is ServerOutput.UnknownUserLeftNotification -> {
+                    notifyObservers(ServerMessageEvent(ServerMessageEvent.Action.UNKNOWN_USER_LEFT, serverState, output.user))
+                }
+                is ServerOutput.UserNameChangedNotification -> {
+                    notifyObservers(ServerMessageEvent(ServerMessageEvent.Action.USER_CHANGE, serverState, output.user))
                 }
                 is ServerOutput.Schedule -> synchronized(this){schedule = schedule + output}
                 is ServerOutput.None -> {} //No action
@@ -197,24 +233,51 @@ class ChatServerListener (serverState: ChatServerState, val port: Int = 61673) :
     }
 
     override fun update(event: ClientMessageEvent) {
-        //Handle messages from client
-        synchronized (this) {
-            if (event.msg.startsWith(Constants.pingString) && event.msg.length <= Constants.pingString.length + System.lineSeparator().length){
-                if (event.sender is ClientHandler)
-                    lastPings.put(event.sender.uid, System.currentTimeMillis()) //Just received a ping
-            } else {
-                if (event.sender is ClientHandler)
-                    lastPings.put(event.sender.uid, System.currentTimeMillis()) //Consider a message as a ping
+        val uid = clients.direct(event.sender)
 
-                if (event.sender is ClientHandler)
-                    serverState = serverState.processIncomingMessageFromClient(event.sender.uid, event.msg)
-                else if (event.sender is ServerConsole)
-                    serverState = serverState.processIncomingMessageFromClient(event.sender.uid, event.msg)
+        if (uid != null) {
+
+            synchronized(this) {
+                lastPings.put(uid, System.currentTimeMillis())
+
+                if (event.msg.startsWith(Constants.pingString) && event.msg.length <= Constants.pingString.length + System.lineSeparator().length) {
+                    //Just a ping, we already recorded it. No more actions are needed.
+                } else {
+                    if (event.doNotInterpret){
+                        val user = serverState.clientIDToUser(uid)
+                        if (user != null) {
+                            val rooms = serverState.getRoomsByUser(user)
+                            rooms.forEach { room ->
+                                messageFromUserToRoom(ChatHistory.Entry(event.msg, user, room, System.currentTimeMillis()))
+                            }
+                            return //Return instead of reprocessing the output from the server (because doNotInterpret == true)
+                        }
+                    } else {
+                        serverState = serverState.processIncomingMessageFromClient(uid, event.msg)
+                    }
+                    /*
+
+                    if (event.sender is ClientHandler)
+                        serverState = serverState.processIncomingMessageFromClient(event.sender.uid, event.msg)
+                    else if (event.sender is ServerConsole)
+                        serverState = serverState.processIncomingMessageFromClient(event.sender.uid, event.msg)
+                    else if (event.sender is TopChatter) {
+                        val topChatter = serverState.getUserByUsername("TopChatter")
+                        val mainRoom = serverState.getRoomByName(Constants.mainRoomName)
+
+                        if (topChatter != null && mainRoom != null)
+                            messageFromUserToRoom(ChatHistory.Entry(event.msg, topChatter, mainRoom, System.currentTimeMillis()))
+
+                        return //Return instead of reprocessing the output from the server, as we didn't modify it
+                    }*/
+
+                }
             }
-        }
 
-        //Execute the server output
-        processOutputFromServer(serverState.currentOutput)
+            //Execute the server output
+            processOutputFromServer(serverState.currentOutput)
+
+        }
     }
 
     @Synchronized override fun registerObserver(observer: Observer<ServerMessageEvent>) {
@@ -229,7 +292,7 @@ class ChatServerListener (serverState: ChatServerState, val port: Int = 61673) :
             synchronized(this) {
                 clients = clients - pair
             }
-            observer.update(event = ServerMessageEvent(ServerMessageEvent.Action.STOP))
+            observer.update(event = ServerMessageEvent(ServerMessageEvent.Action.STOP, serverState))
         }
     }
 
@@ -287,7 +350,7 @@ class ChatServerListener (serverState: ChatServerState, val port: Int = 61673) :
             if (it.key != serverConsole.uid && System.currentTimeMillis() - it.value > Constants.pingTimeoutAfterSeconds * 1000){
                 fetchServerMessageObserver(it.key){ observer ->
                     val user = serverState.clientIDToUser(it.key)
-                    notifyObserver(observer, ServerMessageEvent(ServerMessageEvent.Action.TIMEOUT))
+                    notifyObserver(observer, ServerMessageEvent(ServerMessageEvent.Action.TIMEOUT, serverState))
                     if (user != null) {
                         serverState.getRoomsByUser(user).forEach {
                             serviceMessageToRoom(it.name,"User ${user.username} timeout.")

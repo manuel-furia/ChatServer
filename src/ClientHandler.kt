@@ -54,7 +54,11 @@ class ClientHandler(val uid: Long, tcpClient: Socket, observer: Observer<ClientM
             ServerMessageEvent.Action.PING -> send("TODO: Implement ping")
             ServerMessageEvent.Action.STOP -> stop()
             ServerMessageEvent.Action.TIMEOUT -> stop()
-            else -> serverError(event.msg ?: "")
+            ServerMessageEvent.Action.USER_JOINED -> {}
+            ServerMessageEvent.Action.KNOWN_USER_LEFT -> {}
+            ServerMessageEvent.Action.UNKNOWN_USER_LEFT -> {}
+            ServerMessageEvent.Action.USER_CHANGE -> {}
+            ServerMessageEvent.Action.ERROR -> serverError(event.msg ?: "")
         }
     }
 

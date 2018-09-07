@@ -1,4 +1,3 @@
-import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.ZoneId
 
@@ -127,7 +126,7 @@ object Commands {
 
             ":leave" to {params ->
 
-                if (params.room.name == Constants.defaultRoomName){
+                if (params.room.name == Constants.mainRoomName){
                     params.server.appendOutput(ServerOutput.youCantLeaveTheMainRoomMessage(params.clientID))
                 } else {
 
@@ -151,7 +150,7 @@ object Commands {
                         params.server.appendOutput(ServerOutput.userDoesNotExistsMessage(params.clientID))
                     } else {
                         val targetPermissions =  params.room.getPermissionsFor(user)
-                        if (params.room.name == Constants.defaultRoomName) {
+                        if (params.room.name == Constants.mainRoomName) {
                             params.server.appendOutput(ServerOutput.youCantKickUsersFromTheMainRoomMessage(params.clientID))
                         } else if (permissions >= targetPermissions) {
                             val clientID = params.server.userToClientID(user) ?: -1
@@ -350,11 +349,11 @@ object Commands {
                     s + (if (formatAsData) msg.toDataMessage() else msg.toExtendedTextMessage()) + "\n"
                 }
 
-                val queryMap = mapOf(*(arg
+                val queryMap = (arg
                         .split(";")
                         .map {x -> x.split("=")}
                         .filter { x -> x.size == 2 }
-                        .map {it[0] to it[1]}).toTypedArray())
+                        .map {it[0] to it[1]}).toMap()
 
                 if (permissions >= ChatRoom.UserPermissions.READ) {
 

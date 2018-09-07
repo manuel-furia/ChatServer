@@ -20,10 +20,14 @@ class ServerConsole(observer: Observer<ClientMessageEvent>, observable: Observab
     override fun update(event: ServerMessageEvent) {
         when (event.action){
             ServerMessageEvent.Action.MESSAGE -> print(event.msg)
-            ServerMessageEvent.Action.PING -> print(":- Somebody is pinging the server console.")
+            ServerMessageEvent.Action.PING -> println(":- Somebody is pinging the server console. :D")
             ServerMessageEvent.Action.STOP -> {} //You can't stop the server console
             ServerMessageEvent.Action.TIMEOUT -> {} //The server console does not timeout
-            else -> print("Server Error: " + event.msg)
+            ServerMessageEvent.Action.USER_CHANGE -> {}
+            ServerMessageEvent.Action.USER_JOINED -> {}
+            ServerMessageEvent.Action.KNOWN_USER_LEFT -> {}
+            ServerMessageEvent.Action.UNKNOWN_USER_LEFT -> {}
+            ServerMessageEvent.Action.ERROR -> println("Server Error: " + event.msg)
         }
     }
 

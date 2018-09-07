@@ -1,6 +1,6 @@
 data class ChatServerState (
         val currentOutput: List<ServerOutput> = listOf(),
-        val rooms: Set<ChatRoom> = setOf(ChatRoom(Constants.defaultRoomName)),
+        val rooms: Set<ChatRoom> = setOf(ChatRoom(Constants.mainRoomName)),
         val users: Set<ChatUser> = setOf(),
         val commands:Map<String, (CommandParameters) -> String> = mapOf(),
         val adminCredentials: Map<String, String> = Constants.defaultAdminCredentials,
@@ -33,8 +33,16 @@ data class ChatServerState (
         if (users.any{it.username == user.username}){
             return Pair(null, this.appendOutput(failureActions).copy(users = users, usersAndIds = newUsersAndIDs))
         } else {
-            return Pair(user, this.appendOutput(successActions).copy(users = users + user, usersAndIds = newUsersAndIDs)
-                    .userJoinRoom(Constants.defaultRoomName, user.username))
+
+            val userJoinedEvent = if (user.level > ChatUser.Level.UNKNOWN){
+                this.appendOutput(ServerOutput.UserNameChangedNotification(user.username))
+            } else {
+                this.appendOutput(ServerOutput.UserJoinedNotification(user.username))
+            }
+
+            return Pair(user, userJoinedEvent.appendOutput(successActions).copy(users = users + user, usersAndIds = newUsersAndIDs)
+                    .userJoinRoom(Constants.mainRoomName, user.username))
+
         }
     }
 
@@ -80,7 +88,17 @@ data class ChatServerState (
             //Find in which rooms the user belongs to and remove it from there
             val newRooms = rooms.map {it.userLeave(user)}.toSet()
             val clientID = userToClientID(user)
-            val stateUpdated = this.updateUsers(users - user).updateRooms(newRooms)
+
+            val stateUpdated = this
+                    .updateUsers(users - user)
+                    .updateRooms(newRooms)
+                    .appendOutput(
+                        if (user.level == ChatUser.Level.UNKNOWN)
+                            ServerOutput.UnknownUserLeftNotification(user.username)
+                        else
+                            ServerOutput.KnownUserLeftNotification(user.username)
+                        )
+
             if (clientID != null && !noDisconnect)
                 return stateUpdated.appendOutput(ServerOutput.DropClient(clientID))
             else
@@ -126,7 +144,7 @@ data class ChatServerState (
     }
 
     fun removeRoom(roomName: String): ChatServerState {
-        if (roomName != Constants.defaultRoomName) {
+        if (roomName != Constants.mainRoomName) {
             val room = rooms.find { it.name == roomName }
             if (room != null)
                 return this.copy(rooms = rooms - room)
@@ -217,7 +235,7 @@ data class ChatServerState (
 
     fun liftBan(ip: String): ChatServerState = this
             .appendOutput(ServerOutput.LiftBan(ip))
-            .appendOutput(ServerOutput.ServiceMessageToRoom("Unbanned $ip", Constants.defaultRoomName))
+            .appendOutput(ServerOutput.ServiceMessageToRoom("Unbanned $ip", Constants.mainRoomName))
 
     fun banUserByName(username: String): ChatServerState {
         val user = getUserByUsername(username)
@@ -237,18 +255,18 @@ data class ChatServerState (
         val responseCliendID = usersAndIds.direct(user) ?: clientID
 
         val (room, content) = if (message.startsWith(Constants.roomSelectionPrefix)) {
-            val roomName =  message.drop(Constants.roomSelectionPrefix.length).split(" ").getOrNull(0) ?: Constants.defaultRoomName
+            val roomName =  message.drop(Constants.roomSelectionPrefix.length).split(" ").getOrNull(0) ?: Constants.mainRoomName
             val roomObj = rooms.find { it.name == roomName } ?: return appendOutput(ServerOutput.roomDoesNotExistsMessage(roomName, responseCliendID))
             val content = message.drop(Constants.roomSelectionPrefix.length + roomName.length + 1) //Drop the room name plus the space following it
             roomObj to content
         } else {
             val content = message
-            val roomObj = rooms.find { it.name == Constants.defaultRoomName } ?: return this.serverErrorTo("Server error: Cannot find default room", clientID)
+            val roomObj = rooms.find { it.name == Constants.mainRoomName } ?: return this.serverErrorTo("Server error: Cannot find default room", clientID)
             roomObj to content
         }
 
         //Can the user address the specified room? (Only if they joined it, or if its the default server room)
-        if (room.name != Constants.defaultRoomName && !room.isUserInRoom(user) && userOverride == null)
+        if (room.name != Constants.mainRoomName && !room.isUserInRoom(user) && userOverride == null)
             return appendOutput(ServerOutput.userCannotAddressRoomMessage(room.name, responseCliendID))
 
         val result = Interpreter(content, this, user, room).result

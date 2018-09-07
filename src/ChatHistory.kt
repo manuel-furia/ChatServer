@@ -1,6 +1,3 @@
-import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const
-import java.sql.Timestamp
-import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -28,7 +25,7 @@ class ChatHistory private constructor(history: List<Entry>) {
             val date = Date(timestamp)
             val timeFormat = SimpleDateFormat("HH:mm")
             val timeString = timeFormat.format(date)
-            val roomString = if (room.name == Constants.defaultRoomName) "" else ("@" + room.name + " ")
+            val roomString = if (room.name == Constants.mainRoomName) "" else ("@" + room.name + " ")
 
             return  roomString + (if (noTime) "" else "[$timeString] ") + (user.username + ": ") + message
         }
@@ -44,7 +41,7 @@ class ChatHistory private constructor(history: List<Entry>) {
          * Returns the message without information on the time it was received, as string
          */
         fun toTextMessage(): String {
-            if (room.name == Constants.defaultRoomName)
+            if (room.name == Constants.mainRoomName)
                 return message + " from " + user.username
             else
                 return message + " from " + user.username + " to " + room.name
