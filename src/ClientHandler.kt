@@ -14,7 +14,7 @@ class ClientHandler(val uid: Long, tcpClient: Socket, observer: Observer<ClientM
     var running: Boolean = false
     private set
 
-    val inetAddress = tcpClient.inetAddress.hostAddress
+    val hostAddress = tcpClient.inetAddress.hostAddress
 
     init {
         observable.registerObserver(this)

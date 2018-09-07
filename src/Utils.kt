@@ -12,7 +12,7 @@ object Utils {
     fun produceValidUsername(username: String): String {
         val filtered = username.split(" ")[0].filter {it.isLetterOrDigit() || it == '_'}.take(Constants.maxRoomNameLength)
 
-        if (filtered.length <= 0 || filtered[0].isDigit() || filtered == Constants.serverMessageUserName)
+        if (filtered.length <= 0 || filtered[0].isDigit())
             return Constants.defaultUsernamePrefix + filtered
         else
             return filtered

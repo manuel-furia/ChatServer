@@ -3,13 +3,10 @@ data class ChatServerState (
         val rooms: Set<ChatRoom> = setOf(ChatRoom(Constants.defaultRoomName)),
         val users: Set<ChatUser> = setOf(),
         val commands:Map<String, (CommandParameters) -> String> = mapOf(),
-        val adminCredentials: Map<String, String> = mapOf(Constants.defaultAdminUsername to Constants.defaultAdminPassword),
+        val adminCredentials: Map<String, String> = Constants.defaultAdminCredentials,
         val messageHistory: ChatHistory = ChatHistory.empty,
         val bannedIPs: Set<String> = setOf(),
         private val usersAndIds: Bijection<ChatUser, Long> = BijectionMap()) {
-
-    //User that represents the server, and send messages on its behalf
-    val serverUser = ChatUser(Constants.serverMessageUserName, ChatUser.Level.ADMIN)
 
     fun registerUser(userName: String, clientHandlerID: Long, permission: ChatUser.Level = ChatUser.Level.NORMAL): ChatServerState {
         return usernameValidateAndInsert(userName, clientHandlerID, permission).second
@@ -75,17 +72,21 @@ data class ChatServerState (
         return this
     }
 
-    fun removeUser(userName: String): ChatServerState {
+    fun removeUser(userName: String, noDisconnect: Boolean = false): ChatServerState {
 
         val user = users.find {it.username == userName}
 
-        if (user != null){
+        if (user != null && user.username != Constants.serverConsoleUsername){
             //Find in which rooms the user belongs to and remove it from there
             val newRooms = rooms.map {it.userLeave(user)}.toSet()
-
-            return this.updateUsers(users - user).updateRooms(newRooms)
+            val clientID = userToClientID(user)
+            val stateUpdated = this.updateUsers(users - user).updateRooms(newRooms)
+            if (clientID != null && !noDisconnect)
+                return stateUpdated.appendOutput(ServerOutput.DropClient(clientID))
+            else
+                return stateUpdated
         } else {
-            return this.copy(users = users)
+            return this
         }
 
     }
@@ -97,7 +98,7 @@ data class ChatServerState (
             val clientID = userToClientID(user)
             if (clientID != null){
                 val newLevel = if (user.level == ChatUser.Level.UNKNOWN) ChatUser.Level.NORMAL else user.level
-                val (newUser, newState)= usernameValidateAndInsert(userNameTo, clientID, newLevel)
+                val (newUser, newState) = usernameValidateAndInsert(userNameTo, clientID, newLevel)
                 if (newState.users.size == users.size + 1 && newUser != null){
                     val newRooms = rooms.map {
                         if (it.isUserInRoom(user))
@@ -105,9 +106,9 @@ data class ChatServerState (
                         else
                             it
                     }.toSet()
-                    return newState.updateRooms(newRooms).removeUser(user.username)
+                    return newState.updateRooms(newRooms).removeUser(user.username, noDisconnect = true)
                 } else {
-                    return this
+                    return newState
                 }
             }
 
@@ -204,15 +205,17 @@ data class ChatServerState (
 
     fun addBannedIP(ip: String): ChatServerState = this.copy(bannedIPs = bannedIPs + ip)
 
-    fun liftBan(ip: String): ChatServerState = this.copy(bannedIPs = bannedIPs - ip)
+    fun liftBan(ip: String): ChatServerState = this
+            .appendOutput(ServerOutput.LiftBan(ip))
+            .appendOutput(ServerOutput.ServiceMessageToRoom("Unbanned $ip", Constants.defaultRoomName))
 
-    fun banUserByName(username: String, duration: Int = -1): ChatServerState {
+    fun banUserByName(username: String): ChatServerState {
         val user = getUserByUsername(username)
         if (user != null) {
             val id = userToClientID(user)
             if (id != null) {
-                val banAction = ServerOutput.BanClient(id, duration)
-                val banMessage = ServerOutput.youHaveBeenBannedMessage(id, duration)
+                val banAction = ServerOutput.BanClient(id)
+                val banMessage = ServerOutput.youHaveBeenBannedMessage(id)
                 return this.appendOutput(banMessage).appendOutput(banAction)
             }
         }

@@ -10,17 +10,21 @@ sealed class ServerOutput {
 
     class DropClient(val clientID: Long): ServerOutput()
 
-    class BanClient(val clientID: Long, val duration: Int): ServerOutput()
+    class BanClient(val clientID: Long): ServerOutput()
 
     class LiftBan(val bannedIP: String): ServerOutput()
 
-    class Schedule(val timestamp: Long, val action: String, val user: ChatUser): ServerOutput()
+    class Schedule(val timestamp: Long, val action: String, val user: ChatUser, val room: ChatRoom): ServerOutput()
 
     class MessageFromUserToRoom(val message: ChatHistory.Entry): ServerOutput()
 
     class Ping(val clientID: Long): ServerOutput()
 
     companion object {
+
+        fun roomYouNeedHigherPermissionsThan(username: String, clientID: Long) = ServiceMessageToClient(
+                "You need higher permission than the target user $username to issue this command.",
+                clientID)
 
         fun roomPermissionDenied(permissions: ChatRoom.UserPermissions, requiredPermissions: ChatRoom.UserPermissions, clientID: Long) = ServiceMessageToClient(
                 "User permission ${permissions.name} is not enough to issue the command. At least ${requiredPermissions.name} is required.",
@@ -30,6 +34,10 @@ sealed class ServerOutput {
                 "User level ${permissions.name} is not enough to issue the command. At least level ${requiredPermissions.name} is required."
                         + if (requiredPermissions == ChatUser.Level.NORMAL) " Did you set a username?" else "",
                 clientID)
+
+        fun roomPermissionGranted(permissions: ChatRoom.UserPermissions, username: String, roomName: String) = ServiceMessageToRoom(
+                "Permissions ${permissions.name} granted to $username.",
+                roomName)
 
         fun usernameNotSet(clientID: Long) = ServiceMessageToClient(
                 "User name not set. Use command :user to set it.",
@@ -106,8 +114,8 @@ sealed class ServerOutput {
                 "Error: you did not join the room ${room}. Use :room ${room}",
                 clientID)
 
-        fun youHaveBeenBannedMessage(clientID: Long, duration: Int) = ServiceMessageToClient (
-                    "You have been banned" + if (duration < 0) "." else " for $duration minutes.",
+        fun youHaveBeenBannedMessage(clientID: Long) = ServiceMessageToClient (
+                    "You have been banned.",
                     clientID
             )
 
@@ -116,9 +124,10 @@ sealed class ServerOutput {
                 roomName
         )
 
-        fun youHaveBeenKickedFromRoom(roomName: String) = ServiceMessageToRoom (
-                "You have been kicked from room $roomName.",
-                roomName
+        fun youHaveBeenKickedFromRoom(clientID: Long ,roomName: String, reason: String) = ServiceMessageToClient (
+                "You have been kicked from room $roomName." +
+                if (reason != "") " Reason: $reason." else "",
+                clientID
         )
 
         fun unknownCommand(clientID: Long, command: String) = ServiceMessageToClient (

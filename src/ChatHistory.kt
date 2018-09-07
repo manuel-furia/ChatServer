@@ -28,8 +28,9 @@ class ChatHistory private constructor(history: List<Entry>) {
             val date = Date(timestamp)
             val timeFormat = SimpleDateFormat("HH:mm")
             val timeString = timeFormat.format(date)
+            val roomString = if (room.name == Constants.defaultRoomName) "" else ("@" + room.name + " ")
 
-            return if (noTime) "" else "[$timeString] " + (user.username + ": ") + message
+            return  roomString + (if (noTime) "" else "[$timeString] ") + (user.username + ": ") + message
         }
 
         /**
