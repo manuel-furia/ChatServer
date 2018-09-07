@@ -2,41 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="454dbd25-b5d0-4911-948c-90246c20bfc8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/TopChatter.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/ChatHistoryTest.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ChatServerListener$checkPings$$inlined$forEach$lambda$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ChatServerListener$checkPings$$inlined$forEach$lambda$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ChatServerListener$processOutputFromServer$$inlined$forEach$lambda$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ChatServerListener$processOutputFromServer$$inlined$forEach$lambda$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ChatServerListener$processOutputFromServer$$inlined$forEach$lambda$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ChatServerListener$processOutputFromServer$$inlined$forEach$lambda$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ChatServerListener$processOutputFromServer$$inlined$forEach$lambda$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ChatServerListener$processOutputFromServer$$inlined$forEach$lambda$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ChatServerListener$processOutputFromServer$$inlined$forEach$lambda$4.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ChatServerListener$serviceMessageToClient$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ChatServerListener$serviceMessageToClient$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ChatServer.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ChatServer.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Bijection.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Bijection.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/BijectionMap$removeByCodomainElement$pair$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/BijectionMap$removeByCodomainElement$pair$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/BijectionMap$removeByDomainElement$pair$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/BijectionMap$removeByDomainElement$pair$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/BijectionMap.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/BijectionMap.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ChatServerListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ChatServerListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ClientHandler$WhenMappings.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ClientHandler$WhenMappings.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ClientHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ClientHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$18.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$18.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/MainKt.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/MainKt.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ServerMessageEvent$Action.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ServerMessageEvent$Action.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ServerMessageEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ServerMessageEvent.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ServerOutput$BanClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ServerOutput$BanClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ServerOutput$Companion.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ServerOutput$Companion.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ServerOutput$DropClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ServerOutput$DropClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ServerOutput$LiftBan.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ServerOutput$LiftBan.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ServerOutput$MessageFromUserToRoom.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ServerOutput$MessageFromUserToRoom.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ServerOutput$Ping.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ServerOutput$Ping.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ServerOutput$Schedule.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ServerOutput$Schedule.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ServerOutput.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ServerOutput.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ChatHistory.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatHistory.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/TopChatter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/TopChatter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Bijection.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Bijection.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BijectionMap.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/BijectionMap.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ChatServerListener.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatServerListener.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ChatServerState.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatServerState.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ClientHandler.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/ClientHandler.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ClientMessageEvent.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/ClientMessageEvent.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Commands.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Commands.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Constants.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Constants.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ServerConsole.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/ServerConsole.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ServerMessageEvent.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/ServerMessageEvent.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ServerOutput.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/ServerOutput.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Utils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Utils.kt" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -44,6 +22,12 @@
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/ChatServer$All_in_ChatServer.ic" NAME="All in ChatServer Coverage Results" MODIFIED="1536364308838" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+  </component>
+  <component name="CoverageViewManager">
+    <option name="myElementSize" value="242" />
   </component>
   <component name="FUSProjectUsageTrigger">
     <session id="-1869734761">
@@ -57,38 +41,31 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="class" value="1" />
-          <entry key="kt" value="183" />
+          <entry key="java" value="2" />
+          <entry key="kt" value="190" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CLASS" value="1" />
-          <entry key="Kotlin" value="183" />
+          <entry key="JAVA" value="2" />
+          <entry key="Kotlin" value="190" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="kt" value="50897" />
+          <entry key="kt" value="56552" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Kotlin" value="50897" />
+          <entry key="Kotlin" value="56552" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ChatServerState.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3810">
-              <caret line="254" selection-start-line="254" selection-end-line="254" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ClientHandler.kt">
           <provider selected="true" editor-type-id="text-editor">
@@ -99,28 +76,28 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/BijectionMap.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="23" selection-start-line="23" selection-end-line="23" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ServerOutput.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ChatServerListener.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="226">
-              <caret line="83" lean-forward="true" selection-start-line="83" selection-end-line="83" />
+            <state relative-caret-position="-1199">
+              <caret line="28" column="73" selection-start-line="28" selection-start-column="73" selection-end-line="28" selection-end-column="73" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ChatRoom.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="8" column="31" selection-start-line="8" selection-start-column="31" selection-end-line="8" selection-end-column="31" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Constants.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="9" column="44" lean-forward="true" selection-start-line="9" selection-start-column="44" selection-end-line="9" selection-end-column="44" />
             </state>
           </provider>
         </entry>
@@ -128,17 +105,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ChatHistory.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="86" selection-start-line="86" selection-end-line="86" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/CommandParameters.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="82" selection-start-column="67" selection-end-column="82" />
+            <state relative-caret-position="1725">
+              <caret line="116" column="56" lean-forward="true" selection-start-line="116" selection-start-column="56" selection-end-line="116" selection-end-column="56" />
             </state>
           </provider>
         </entry>
@@ -146,8 +114,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Commands.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="356" lean-forward="true" selection-start-line="356" selection-end-line="356" />
+            <state relative-caret-position="63">
+              <caret line="356" selection-start-line="356" selection-end-line="356" />
             </state>
           </provider>
         </entry>
@@ -155,17 +123,38 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ChatUser.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="107">
-              <caret line="9" selection-start-line="9" selection-end-line="9" />
+            <state relative-caret-position="180">
+              <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/TopChatter.kt">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Bijection.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="86">
-              <caret line="56" column="47" selection-start-line="56" selection-start-column="47" selection-end-line="56" selection-end-column="47" />
+            <state relative-caret-position="348">
+              <caret line="25" column="7" lean-forward="true" selection-start-line="25" selection-start-column="7" selection-end-line="25" selection-end-column="7" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/BijectionMap.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-540">
+              <caret line="6" column="32" lean-forward="true" selection-start-line="6" selection-start-column="32" selection-end-line="6" selection-end-column="32" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/BijectionMapTest.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="94">
+              <caret line="157" column="83" lean-forward="true" selection-start-line="157" selection-start-column="83" selection-end-line="157" selection-end-column="83" />
+              <folding>
+                <element signature="e#0#81#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -179,6 +168,7 @@
         <option value="Kotlin Interface" />
         <option value="Kotlin Object" />
         <option value="Kotlin Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -209,8 +199,6 @@
         <option value="$PROJECT_DIR$/src/Observable.kt" />
         <option value="$PROJECT_DIR$/src/SelectiveObserver.kt" />
         <option value="$PROJECT_DIR$/src/ServerAction.kt" />
-        <option value="$PROJECT_DIR$/src/Bijection.kt" />
-        <option value="$PROJECT_DIR$/src/BijectionMap.kt" />
         <option value="$PROJECT_DIR$/src/CommandParameters.kt" />
         <option value="$PROJECT_DIR$/src/Interpreter.kt" />
         <option value="$PROJECT_DIR$/src/SelectiveObservable.kt" />
@@ -225,10 +213,16 @@
         <option value="$PROJECT_DIR$/src/ServerMessageEvent.kt" />
         <option value="$PROJECT_DIR$/src/ClientHandler.kt" />
         <option value="$PROJECT_DIR$/src/ServerConsole.kt" />
-        <option value="$PROJECT_DIR$/src/Constants.kt" />
         <option value="$PROJECT_DIR$/src/ClientMessageEvent.kt" />
-        <option value="$PROJECT_DIR$/src/ChatServerListener.kt" />
         <option value="$PROJECT_DIR$/src/TopChatter.kt" />
+        <option value="$PROJECT_DIR$/test/BijectionMapTest.java" />
+        <option value="$PROJECT_DIR$/src/ChatServerListener.kt" />
+        <option value="$PROJECT_DIR$/src/Bijection.kt" />
+        <option value="$PROJECT_DIR$/src/BijectionMap.kt" />
+        <option value="$PROJECT_DIR$/test/BijectionMapTest.kt" />
+        <option value="$PROJECT_DIR$/test/ChatHistoryTest.java" />
+        <option value="$PROJECT_DIR$/test/ChatHistoryTest.kt" />
+        <option value="$PROJECT_DIR$/src/Constants.kt" />
       </list>
     </option>
   </component>
@@ -259,6 +253,11 @@
               <item name="ChatServer" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="ChatServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ChatServer" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -266,10 +265,23 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1536345866886" />
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1536364510881" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -284,6 +296,14 @@
     </option>
   </component>
   <component name="RunManager" selected="Kotlin.MainKt">
+    <configuration name="All in ChatServer" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ChatServer" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ChatServer" type="JetRunConfigurationType" factoryName="Kotlin">
       <module name="ChatServer" />
       <option name="VM_PARAMETERS" value="" />
@@ -313,10 +333,12 @@
     <list>
       <item itemvalue="Kotlin.ChatServer" />
       <item itemvalue="Kotlin.MainKt" />
+      <item itemvalue="JUnit.All in ChatServer" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Kotlin.MainKt" />
+        <item itemvalue="JUnit.All in ChatServer" />
       </list>
     </recent_temporary>
   </component>
@@ -333,11 +355,43 @@
     </task>
     <servers />
   </component>
+  <component name="TestHistory">
+    <history-entry file="All_in_ChatServer - 2018.09.08 at 02h 15m 28s.xml">
+      <configuration name="All in ChatServer" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="All_in_ChatServer - 2018.09.08 at 02h 15m 38s.xml">
+      <configuration name="All in ChatServer" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="All_in_ChatServer - 2018.09.08 at 02h 36m 52s.xml">
+      <configuration name="All in ChatServer" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="All_in_ChatServer - 2018.09.08 at 02h 38m 24s.xml">
+      <configuration name="All in ChatServer" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="All_in_ChatServer - 2018.09.08 at 02h 40m 04s.xml">
+      <configuration name="All in ChatServer" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="All_in_ChatServer - 2018.09.08 at 02h 40m 29s.xml">
+      <configuration name="All in ChatServer" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="All_in_ChatServer - 2018.09.08 at 02h 40m 38s.xml">
+      <configuration name="All in ChatServer" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="All_in_ChatServer - 2018.09.08 at 02h 50m 58s.xml">
+      <configuration name="All in ChatServer" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="All_in_ChatServer - 2018.09.08 at 02h 51m 52s.xml">
+      <configuration name="All in ChatServer" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="All_in_ChatServer - 2018.09.08 at 02h 53m 25s.xml">
+      <configuration name="All in ChatServer" configurationId="JUnit" />
+    </history-entry>
+  </component>
   <component name="ToolWindowManager">
     <frame x="-3" y="31" width="1606" height="872" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26508343" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26508343" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -348,13 +402,14 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.328877" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.328877" />
-      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.39973262" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.39973262" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.328877" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="right" id="Coverage" side_tool="true" weight="0.32991013" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -427,13 +482,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Bijection.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="29" selection-start-line="5" selection-start-column="18" selection-end-line="5" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$KOTLIN_BUNDLED$/lib/kotlin-stdlib-sources.jar!/kotlin/concurrent/Thread.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="133">
@@ -445,13 +493,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
           <caret line="15" selection-start-line="15" selection-end-line="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ChatRoom.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="66" selection-start-line="10" selection-start-column="66" selection-end-line="10" selection-end-column="66" />
         </state>
       </provider>
     </entry>
@@ -490,13 +531,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Constants.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="42" selection-start-line="17" selection-start-column="42" selection-end-line="17" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ClientMessageEvent.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -511,45 +545,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/BijectionMap.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="23" selection-start-line="23" selection-end-line="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ChatUser.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="107">
-          <caret line="9" selection-start-line="9" selection-end-line="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ChatServerState.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3810">
-          <caret line="254" selection-start-line="254" selection-end-line="254" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/CommandParameters.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="82" selection-start-column="67" selection-end-column="82" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Commands.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="356" lean-forward="true" selection-start-line="356" selection-end-line="356" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ClientHandler.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="25" column="8" selection-start-line="25" selection-start-column="8" selection-end-line="25" selection-end-column="8" />
         </state>
       </provider>
     </entry>
@@ -560,24 +559,97 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/TopChatter.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="945">
+          <caret line="63" column="46" selection-start-line="63" selection-start-column="46" selection-end-line="63" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ChatServerState.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="392">
+          <caret line="254" selection-start-line="254" selection-end-line="254" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ClientHandler.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="25" column="8" selection-start-line="25" selection-start-column="8" selection-end-line="25" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BijectionMap.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-540">
+          <caret line="6" column="32" lean-forward="true" selection-start-line="6" selection-start-column="32" selection-end-line="6" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Bijection.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="348">
+          <caret line="25" column="7" lean-forward="true" selection-start-line="25" selection-start-column="7" selection-end-line="25" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/BijectionMapTest.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="94">
+          <caret line="157" column="83" lean-forward="true" selection-start-line="157" selection-start-column="83" selection-end-line="157" selection-end-column="83" />
+          <folding>
+            <element signature="e#0#81#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/ChatServerListener.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="83" lean-forward="true" selection-start-line="83" selection-end-line="83" />
+        <state relative-caret-position="-1199">
+          <caret line="28" column="73" selection-start-line="28" selection-start-column="73" selection-end-line="28" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Commands.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="63">
+          <caret line="356" selection-start-line="356" selection-end-line="356" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/ChatHistoryTest.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="199">
+          <caret line="126" column="74" lean-forward="true" selection-start-line="126" selection-start-column="74" selection-end-line="126" selection-end-column="74" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ChatHistory.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="86" selection-start-line="86" selection-end-line="86" />
+        <state relative-caret-position="1725">
+          <caret line="116" column="56" lean-forward="true" selection-start-line="116" selection-start-column="56" selection-end-line="116" selection-end-column="56" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/TopChatter.kt">
+    <entry file="file://$PROJECT_DIR$/src/ChatUser.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="86">
-          <caret line="56" column="47" selection-start-line="56" selection-start-column="47" selection-end-line="56" selection-end-column="47" />
+        <state relative-caret-position="180">
+          <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ChatRoom.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="31" selection-start-line="8" selection-start-column="31" selection-end-line="8" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Constants.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="44" lean-forward="true" selection-start-line="9" selection-start-column="44" selection-end-line="9" selection-end-column="44" />
         </state>
       </provider>
     </entry>

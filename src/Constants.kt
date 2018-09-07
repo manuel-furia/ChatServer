@@ -15,7 +15,7 @@ object Constants {
     const val roomAlignmentPadding = 8
     const val maxNonAdminSchedule = 60
     const val pingTimeoutCheckEverySeconds = 10
-    const val pingTimeoutAfterSeconds = 30
+    const val pingTimeoutAfterSeconds = 60
     const val serverMessagePrefix = ":-"
     const val pingString = ":PING:"
     const val defaultQueryMinutesAgo = 10

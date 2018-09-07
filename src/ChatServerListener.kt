@@ -26,7 +26,7 @@ class ChatServerListener (serverState: ChatServerState, val port: Int = 61673) :
     /**
      * Clients <-> ClientStatus bijection
      */
-    private var clients: Bijection<Observer<ServerMessageEvent>, Long> = BijectionMap(setOf(serverConsole to serverConsole.uid))
+    private var clients: Bijection<Observer<ServerMessageEvent>, Long> = BijectionMap(listOf(serverConsole to serverConsole.uid))
 
     private var schedule: List<ServerOutput.Schedule> = listOf()
 

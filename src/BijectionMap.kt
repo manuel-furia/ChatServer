@@ -1,15 +1,20 @@
 /**
  * Naive implementation of a bijection using Map
- * Not efficient for inner loops
+ * Not efficient for huge amount of elements
  */
-class BijectionMap<Domain, Codomain>(private val pairs: Set<Pair<Domain, Codomain>>): Bijection<Domain, Codomain> {
+class BijectionMap<Domain, Codomain> private constructor(pairs: Set<Pair<Domain, Codomain>>): Bijection<Domain, Codomain> {
 
     constructor(): this(setOf())
 
-    constructor(map: Map<Domain, Codomain>): this(map.entries.map{it.toPair()}.toSet())
+    constructor(list: List<Pair<Domain, Codomain>>): this(BijectionMap.distinctPairsUnsafe(list))
 
-    private val directMap = pairs.toMap()
-    private val inverseMap = pairs.map {it.second to it.first}.toMap()
+    constructor(map: Map<Domain, Codomain>): this(BijectionMap.distinctPairsUnsafe(map.entries.map { it.toPair() }))
+
+    private constructor(pairs: Set<Pair<Domain, Codomain>>, pair: Pair<Domain,Codomain>): this(BijectionMap.distinctPairsSafeExceptLast(pairs, pair))
+
+    private val pairs = BijectionMap.distinctPairsSafe(pairs)
+    private val directMap = this.pairs.toMap()
+    private val inverseMap = this.pairs.map {it.second to it.first}.toMap()
 
     override val domainEntries: Set<Domain>
         get() = directMap.keys
@@ -32,11 +37,11 @@ class BijectionMap<Domain, Codomain>(private val pairs: Set<Pair<Domain, Codomai
     }
 
     override operator fun plus(pair: Pair<Domain, Codomain>): Bijection<Domain, Codomain> {
-        return BijectionMap(pairs + pair)
+        return BijectionMap(BijectionMap.distinctPairsSafe(pairs), pair)
     }
 
     override operator fun minus(pair: Pair<Domain, Codomain>): Bijection<Domain, Codomain> {
-        return BijectionMap(pairs - pair)
+        return BijectionMap(BijectionMap.distinctPairsSafe(pairs - pair))
     }
 
     /**
@@ -45,7 +50,7 @@ class BijectionMap<Domain, Codomain>(private val pairs: Set<Pair<Domain, Codomai
     override fun removeByDomainElement(d: Domain): Bijection<Domain, Codomain> {
         val pair = find { it.first == d }
         if (pair != null) {
-            return BijectionMap(pairs - pair)
+            return BijectionMap(BijectionMap.distinctPairsSafe((pairs - pair)))
         } else {
             return this
         }
@@ -57,7 +62,7 @@ class BijectionMap<Domain, Codomain>(private val pairs: Set<Pair<Domain, Codomai
     override fun removeByCodomainElement(d: Codomain): Bijection<Domain, Codomain> {
         val pair = find { it.second == d }
         if (pair != null) {
-            return BijectionMap(pairs - pair)
+            return BijectionMap(BijectionMap.distinctPairsSafe(pairs - pair))
         } else {
             return this
         }
@@ -72,17 +77,43 @@ class BijectionMap<Domain, Codomain>(private val pairs: Set<Pair<Domain, Codomai
     }
 
     override fun find(condition: (pair: Pair<Domain, Codomain>) -> Boolean): Pair<Domain, Codomain>? {
-        val pairs = directMap.entries.map{it.toPair()}.toSet()
+        val pairs = directMap.entries.map{it.toPair()}
         return pairs.find(condition)
     }
 
     override fun filter(condition: (pair: Pair<Domain, Codomain>) -> Boolean): Bijection<Domain, Codomain> {
-        return BijectionMap(pairs.filter(condition).toSet())
+        return BijectionMap(BijectionMap.distinctPairsSafe(pairs.filter(condition).toSet()))
     }
 
-    override fun map(function: (pair: Pair<Domain, Codomain>) -> Pair<Domain, Codomain>): Bijection<Domain, Codomain> {
-        return BijectionMap(pairs.map(function).toSet())
+    override fun<T, K> map(function: (pair: Pair<Domain, Codomain>) -> Pair<T, K>): Bijection<T, K> {
+        return BijectionMap(BijectionMap.distinctPairsUnsafe(pairs.map(function)))
     }
 
+
+
+
+
+    companion object {
+        private fun<Domain, Codomain> distinctPairsSafeExceptLast(oldPairs: Set<Pair<Domain, Codomain>>, last: Pair<Domain, Codomain>): Set<Pair<Domain, Codomain>> {
+            val mutResult = mutableSetOf<Pair<Domain, Codomain>>()
+            mutResult.addAll(oldPairs)
+            mutResult.removeAll {it.first == last.first || it.second == last.second}
+            mutResult.add(last)
+            return mutResult
+        }
+
+        private fun<Domain, Codomain> distinctPairsUnsafe(pairs: List<Pair<Domain, Codomain>>): Set<Pair<Domain, Codomain>> {
+            val mutResult = mutableSetOf<Pair<Domain, Codomain>>()
+            for (pair in pairs) {
+                mutResult.removeAll {it.first == pair.first || it.second == pair.second}
+                mutResult.add(pair)
+            }
+            return mutResult
+        }
+
+        private fun<Domain, Codomain> distinctPairsSafe(pairs: Set<Pair<Domain, Codomain>>): Set<Pair<Domain, Codomain>> {
+            return pairs
+        }
+    }
 
 }

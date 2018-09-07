@@ -14,7 +14,7 @@ interface Bijection<DomainEntry, CodomainEntry> {
     fun codomainContains(q: CodomainEntry): Boolean
     fun find(condition: (pair: Pair<DomainEntry, CodomainEntry>) -> Boolean): Pair<DomainEntry, CodomainEntry>?
     fun filter(condition: (pair: Pair<DomainEntry, CodomainEntry>) -> Boolean): Bijection<DomainEntry, CodomainEntry>
-    fun map(function: (pair: Pair<DomainEntry, CodomainEntry>) -> Pair<DomainEntry, CodomainEntry>): Bijection<DomainEntry, CodomainEntry>
+    fun<T, K> map(function: (pair: Pair<DomainEntry, CodomainEntry>) -> Pair<T, K>): Bijection<T, K>
     operator fun plus(pair: Pair<DomainEntry, CodomainEntry>): Bijection<DomainEntry, CodomainEntry>
     operator fun minus(pair: Pair<DomainEntry, CodomainEntry>): Bijection<DomainEntry, CodomainEntry>
 
