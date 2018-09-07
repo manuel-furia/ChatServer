@@ -145,6 +145,16 @@ data class ChatServerState (
             return this
     }
 
+    fun setUserPermissionInRoom(roomName: String, username: String, permission: ChatRoom.UserPermissions): ChatServerState {
+        val room = rooms.find { it.name == roomName }
+        val user = getUserByUsername(username)
+
+        if (room != null && user != null)
+            return this.updateRoom(room, room.setPermissions(user, permission))
+        else
+            return this
+    }
+
     fun userJoinRoom(roomName: String, username: String): ChatServerState {
         val room = rooms.find{ it.name == roomName }
         val user = users.find { it.username == username }

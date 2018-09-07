@@ -79,6 +79,15 @@ sealed class ServerOutput {
                 "Error: User does not exists.",
                 clientID)
 
+        fun userPvtDeniedMessage(clientID: Long) = ServiceMessageToClient(
+                "Error: You can't send pvt to this user.",
+                clientID)
+
+        fun userPvtFailedMessage(clientID: Long) = ServiceMessageToClient(
+                "Error: There was a problem in creating the pvt room.",
+                clientID)
+
+
         fun adminAlreadyExistsMessage(clientID: Long) = ServiceMessageToClient(
                 "Error: This admin account is already logged in.",
                 clientID)

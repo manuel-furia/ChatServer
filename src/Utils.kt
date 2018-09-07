@@ -1,7 +1,10 @@
 object Utils {
 
     fun produceValidRoomName(name: String): String {
-        val filtered = name.split(" ")[0].filter {it.isLetterOrDigit() || it == '_'}.take(Constants.maxUserNameLength)
+        val filtered = name
+                .split(" ")[0]
+                .filter {it.isLetterOrDigit() || it == '_' || it == Constants.pvtRoomUsernameSeperator}
+                .take(Constants.maxUserNameLength)
 
         if (filtered.length <= 0 || filtered[0].isDigit() || filtered == Constants.defaultRoomName)
             return Constants.defaultRoomPrefix + filtered

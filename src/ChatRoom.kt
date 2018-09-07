@@ -43,6 +43,9 @@ data class ChatRoom (val name: String,
      * Returns a room with added the specified user, if possible, otherwise returns the old room
      */
     fun userJoin(user: ChatUser): ChatRoom {
+        //If the room already contains the user, do nothing
+        if (users.contains(user)) return this
+
         //Check if whitelisted or not blacklisted
         if ((whitelist.size == 0 || whitelist.contains(user)) && !blacklist.contains(user)) {
 

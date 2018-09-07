@@ -396,12 +396,136 @@ object Commands {
                 params.server.updateRoom(params.room, params.room.blacklistClear())
             }
 
-    }
+
+            },
+
+            ":pvt" to {params ->
+
+                val targetUsername = params.argumentLine.trim().split(" ").getOrNull(0)?.trim() ?: ""
+
+                val message = params.argumentLine.drop(targetUsername.length + 1)
+
+                val user = params.server.getUserByUsername(targetUsername)
+
+                if (user != null) {
+
+                    val (serverWithPvtRoom, pvtRoom) = getPvtRoom(params.server, params.user, user)
+
+                    if (pvtRoom != null) {
+
+                        if (pvtRoom.isUserInRoom(params.user)) {
+
+                            val messageEntry = ChatHistory.Entry(message, params.user, pvtRoom, System.currentTimeMillis())
+
+                            serverWithPvtRoom.appendOutput(ServerOutput.MessageFromUserToRoom(messageEntry))
+
+                        } else {
+                            params.server.appendOutput(ServerOutput.userPvtDeniedMessage(params.clientID))
+                        }
+
+                    } else {
+                        params.server.appendOutput(ServerOutput.userPvtFailedMessage(params.clientID))
+                    }
+
+
+                } else {
+                    params.server.appendOutput(ServerOutput.userDoesNotExistsMessage(params.clientID))
+                }
+
+            },
+
+            ":block" to { params ->
+
+                val targetUsername = params.argumentLine.trim().split(" ").getOrNull(0)?.trim() ?: ""
+
+                val user = params.server.getUserByUsername(targetUsername)
+
+                if (user != null) {
+
+                    val (serverWithPvtRoom, pvtRoom) = getPvtRoom(params.server, params.user, user)
+
+                    if (pvtRoom != null) {
+
+                        val pvtRoomWithBlackListed = pvtRoom.blacklistAdd(user).userLeave(user)
+                        serverWithPvtRoom.updateRoom(pvtRoom, pvtRoomWithBlackListed)
+
+                    } else {
+                        params.server.appendOutput(ServerOutput.userPvtFailedMessage(params.clientID))
+                    }
+
+
+                } else {
+                    params.server.appendOutput(ServerOutput.userDoesNotExistsMessage(params.clientID))
+                }
+
+            },
+
+            ":unblock" to { params ->
+
+                val targetUsername = params.argumentLine.trim().split(" ").getOrNull(0)?.trim() ?: ""
+
+                val user = params.server.getUserByUsername(targetUsername)
+
+                if (user != null) {
+
+                    val (serverWithPvtRoom, pvtRoom) = getPvtRoom(params.server, params.user, user)
+
+                    if (pvtRoom != null) {
+
+                        val pvtRoomWithBlackListed = pvtRoom.blacklistRemove(user)
+                        serverWithPvtRoom.updateRoom(pvtRoom, pvtRoomWithBlackListed)
+
+                    } else {
+                        params.server.appendOutput(ServerOutput.userPvtFailedMessage(params.clientID))
+                    }
+
+
+                } else {
+                    params.server.appendOutput(ServerOutput.userDoesNotExistsMessage(params.clientID))
+                }
+
+            }
 
 
     )
 
     val allCommands = basicCommands
+
+    private fun getPvtRoom(server: ChatServerState, userA: ChatUser, userB: ChatUser): Pair<ChatServerState, ChatRoom?> {
+        val maybePvtRoomName = listOf<String>(userA.username, userB.username)
+                .sorted()
+                .fold(""){s, u -> s + Constants.pvtRoomUsernameSeperator + u}
+                .drop(1) //Drop the first dot
+
+        val maybePvtRoom = server.getRoomByName(maybePvtRoomName)
+
+        val serverWithPvtRoom = if (maybePvtRoom == null) {
+            server.addRoom(maybePvtRoomName)
+
+        } else {
+            server
+        }
+
+        val pvtRoom = serverWithPvtRoom
+                .getRoomByName(maybePvtRoomName)
+
+        val updatedPvtRoom = pvtRoom
+                ?.whitelistAdd(userA)
+                ?.whitelistAdd(userB)
+                ?.userJoin(userA)
+                ?.userJoin(userB)
+                ?.setPermissions(userB, ChatRoom.UserPermissions.ADMIN)
+                ?.setPermissions(userA, ChatRoom.UserPermissions.ADMIN)
+
+
+        val serverWithUpdatedPvtRoom = if (pvtRoom != null && updatedPvtRoom != null) {
+            serverWithPvtRoom.updateRoom(pvtRoom, updatedPvtRoom)
+        } else {
+            serverWithPvtRoom
+        }
+
+        return Pair(serverWithUpdatedPvtRoom, updatedPvtRoom)
+    }
 
 
 }
