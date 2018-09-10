@@ -25,10 +25,12 @@ class PluginManager (val directory: String, basicCommands: Map<String, (CommandP
                             errStream?.println("Plugin Warning: Plugin ${commandMaps[i].first} is overriding command ${elem} already defined by plugin ${commandMaps[j].first}")
                         }
                     }
-                    for (elem in basicCommands) {
-                        if (commandMaps[j].second.keys.contains(elem.key)){
-                            errStream?.println("Plugin Warning: Plugin ${commandMaps[i].first} is overriding command ${elem} already defined in the basic server commands.")
-                        }
+                }
+            }
+            for (i in commandMaps.indices){
+                for (elem in basicCommands) {
+                    if (commandMaps[i].second.keys.contains(elem.key)){
+                        errStream?.println("Plugin Warning: Plugin ${commandMaps[i].first} is overriding command ${elem.key} already defined in the basic server commands.")
                     }
                 }
             }

@@ -12,8 +12,15 @@ class Plugin (val filename: String, errStream: PrintStream?) {
     val commands: Map<String, (CommandParameters) -> ChatServerState>? = {
         try {
             val engine = ScriptEngineManager().getEngineByExtension("kts")
-            engine.eval("mapOf<String, (CommandParameters) -> ChatServerState>($code)")
-                    as Map<String, (CommandParameters) -> ChatServerState>
+
+            if (engine == null){
+                errStream?.println("Plugins Warning: Could not create kts scripting engine. Make sure dependencies are properly installed. The plugins will not be loaded.")
+                null
+            }else {
+                engine.eval("mapOf<String, (CommandParameters) -> ChatServerState>($code)")
+                        as Map<String, (CommandParameters) -> ChatServerState>
+            }
+
         } catch (ex: Exception) {
             errStream?.print("Error in plugin $filename: ${ex.message}\n")
             null
