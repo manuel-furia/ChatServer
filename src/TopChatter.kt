@@ -1,14 +1,31 @@
-class TopChatter(observer: Observer<ClientMessageEvent>, observable: Observable<ServerMessageEvent>): Observer<ServerMessageEvent>, Observable<ClientMessageEvent>, Runnable {
+class TopChatter(observer: Observer<ClientMessageEvent>, observable: Observable<ServerMessageEvent>, val username: String): Observer<ServerMessageEvent>, Observable<ClientMessageEvent>, Runnable {
     private val observer: Observer<ClientMessageEvent> = observer
 
     val uid = 0L
 
+    private var outMessageList: List<String> = listOf()
+    private var lastPinged = 0L
+
     override fun run() {
         while (true) {
             try {
-                //Ping the server every few seconds, to not get timed out
-                observer.update(ClientMessageEvent(this, Constants.pingString, true))
-                Thread.sleep(1000L * Constants.pingTimeoutAfterSeconds / 3)
+                if (outMessageList.size != 0){
+
+                    outMessageList.forEach { notifyObservers(ClientMessageEvent(this, it)) }
+
+                    synchronized(this){
+                        outMessageList = listOf()
+                    }
+                }
+
+                if (System.currentTimeMillis() - lastPinged > 1000L * Constants.pingTimeoutAfterSeconds / 3){
+                    //Ping the server every few seconds, to not get timed out
+                    observer.update(ClientMessageEvent(this, Constants.pingString))
+                    lastPinged = System.currentTimeMillis()
+                }
+
+                Thread.sleep(500L)
+
             } catch (ex: Exception) {
                 error("")
             }
@@ -38,7 +55,7 @@ class TopChatter(observer: Observer<ClientMessageEvent>, observable: Observable<
     enum class UpdateType{JOIN, LEAVE}
 
     private fun topChattersMessage(state: ChatServerState, type: UpdateType, user: String){
-        val topChatters = state.users
+        val topChatters = state.users.filter { it.username != this.username}
                 .map {user -> user.username to state.messageHistory.getAll().count { it.user.username == user.username }}
                 .sortedByDescending { x -> x.second }
                 .take(4)
@@ -48,7 +65,7 @@ class TopChatter(observer: Observer<ClientMessageEvent>, observable: Observable<
             s + " -- ${entry.first} has ${entry.second} messages"
         }
 
-        message.forEach { notifyObservers(ClientMessageEvent(this, it, true)) }
+        outMessageList += message
 
     }
 
@@ -63,7 +80,9 @@ class TopChatter(observer: Observer<ClientMessageEvent>, observable: Observable<
         else
             "User $user is now on the server."
 
-        notifyObservers(ClientMessageEvent(this, actionString, true))
+        synchronized(this) {
+            outMessageList += actionString
+        }
 
         topChattersMessage(state, type, user)
     }

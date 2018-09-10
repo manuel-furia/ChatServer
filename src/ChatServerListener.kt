@@ -1,10 +1,11 @@
+import java.io.File
 import java.net.ServerSocket
 import kotlin.concurrent.thread
 
 /**
  * Takes care of accepting clients and handling the communication between server and clients
  */
-class ChatServerListener (serverState: ChatServerState, val port: Int = 61673) : Observer<ClientMessageEvent>, SelectiveObservable<ServerMessageEvent> {
+class ChatServerListener (serverState: ChatServerState, val port: Int, val pluginDirectory: String? = null) : Observer<ClientMessageEvent>, SelectiveObservable<ServerMessageEvent> {
 
     /**
      * Contains the logical state of the server
@@ -42,6 +43,17 @@ class ChatServerListener (serverState: ChatServerState, val port: Int = 61673) :
 
     fun listen(topChatterBot: Boolean = false){
         try {
+
+            //Load commands and plugins
+            val commands = if (pluginDirectory != null)
+                Commands(File(pluginDirectory), System.out).allCommands
+            else
+                Commands().allCommands
+
+
+            //Set the commands for the server
+            serverState = serverState.setCommands(commands)
+
             //Listen to the specified port
             val socket = ServerSocket(port)
             println("Server is running on port ${socket.localPort}")
@@ -56,15 +68,17 @@ class ChatServerListener (serverState: ChatServerState, val port: Int = 61673) :
             processOutputFromServer(serverState.currentOutput)
 
             if (topChatterBot){
+                val topChatterUsername = "TopChatter"
+
                 //Register the "TopChatter" bot as a client
-                val topChatter = TopChatter(this, this)
+                val topChatter = TopChatter(this, this, topChatterUsername)
                 clients = clients + (topChatter to currentID)
 
                 serverState = serverState.registerUser(
-                        "TopChatter",
+                        topChatterUsername,
                         currentID,
                         ChatUser.Level.NORMAL)
-                        .userJoinRoom(Constants.mainRoomName, "TopChatter")
+                        .userJoinRoom(Constants.mainRoomName, topChatterUsername)
 
                 currentID += 1
 
@@ -238,39 +252,13 @@ class ChatServerListener (serverState: ChatServerState, val port: Int = 61673) :
         if (uid != null) {
 
             synchronized(this) {
+                //Record any message as a ping
                 lastPings.put(uid, System.currentTimeMillis())
 
                 if (event.msg.startsWith(Constants.pingString) && event.msg.length <= Constants.pingString.length + System.lineSeparator().length) {
-                    //Just a ping, we already recorded it. No more actions are needed.
+                    return //Just a ping, we already recorded it. No more actions are needed.
                 } else {
-                    if (event.doNotInterpret){
-                        val user = serverState.clientIDToUser(uid)
-                        if (user != null) {
-                            val rooms = serverState.getRoomsByUser(user)
-                            rooms.forEach { room ->
-                                messageFromUserToRoom(ChatHistory.Entry(event.msg, user, room, System.currentTimeMillis()))
-                            }
-                            return //Return instead of reprocessing the output from the server (because doNotInterpret == true)
-                        }
-                    } else {
-                        serverState = serverState.processIncomingMessageFromClient(uid, event.msg)
-                    }
-                    /*
-
-                    if (event.sender is ClientHandler)
-                        serverState = serverState.processIncomingMessageFromClient(event.sender.uid, event.msg)
-                    else if (event.sender is ServerConsole)
-                        serverState = serverState.processIncomingMessageFromClient(event.sender.uid, event.msg)
-                    else if (event.sender is TopChatter) {
-                        val topChatter = serverState.getUserByUsername("TopChatter")
-                        val mainRoom = serverState.getRoomByName(Constants.mainRoomName)
-
-                        if (topChatter != null && mainRoom != null)
-                            messageFromUserToRoom(ChatHistory.Entry(event.msg, topChatter, mainRoom, System.currentTimeMillis()))
-
-                        return //Return instead of reprocessing the output from the server, as we didn't modify it
-                    }*/
-
+                    serverState = serverState.processIncomingMessageFromClient(uid, event.msg)
                 }
             }
 

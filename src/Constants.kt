@@ -2,6 +2,7 @@ object Constants {
 
 
     val defaultAdminCredentials = mapOf("admin" to "password")
+    val pluginFolder = "plugins"
     const val serverConsoleUsername = "server"
     const val mainRoomName = "hall"
     const val defaultUsernamePrefix = "user_"

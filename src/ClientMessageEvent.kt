@@ -1,1 +1,1 @@
-data class ClientMessageEvent (val sender: Observer<ServerMessageEvent>, val msg: String, val doNotInterpret: Boolean = false)
+data class ClientMessageEvent (val sender: Observer<ServerMessageEvent>, val msg: String)

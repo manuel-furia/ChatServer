@@ -1,4 +1,4 @@
-class Interpreter(line: String, server: ChatServerState, user: ChatUser, room: ChatRoom) {
+class Interpreter(line: String, server: ChatServerState, user: ChatUser, room: ChatRoom, commands: Map<String, (CommandParameters) -> ChatServerState>) {
 
     val result: ChatServerState = {
 
@@ -24,7 +24,7 @@ class Interpreter(line: String, server: ChatServerState, user: ChatUser, room: C
                     val argumentLine = line.drop(commandName.length + 1)
                     val parameters = CommandParameters(argumentLine, server, user, room, clientID)
 
-                    val command = Commands.allCommands[commandName]
+                    val command = commands[commandName]
 
                     if (command != null) {
                         command.invoke(parameters)
@@ -36,7 +36,7 @@ class Interpreter(line: String, server: ChatServerState, user: ChatUser, room: C
             } else { //If instead it is a text message, call the textMessage command
 
                 val parameters = CommandParameters(line, server, user, room, clientID)
-                Commands.allCommands[Commands.textMessage]?.invoke(parameters) ?: server
+                commands[Commands.textMessage]?.invoke(parameters) ?: server
             }
         } else { //ClientID = null, means nobody to execute the command for, so return the state unaltered
             server

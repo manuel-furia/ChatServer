@@ -2,11 +2,15 @@ data class ChatServerState (
         val currentOutput: List<ServerOutput> = listOf(),
         val rooms: Set<ChatRoom> = setOf(ChatRoom(Constants.mainRoomName)),
         val users: Set<ChatUser> = setOf(),
-        val commands:Map<String, (CommandParameters) -> String> = mapOf(),
+        val commands:Map<String, (CommandParameters) -> ChatServerState> = mapOf(),
         val adminCredentials: Map<String, String> = Constants.defaultAdminCredentials,
         val messageHistory: ChatHistory = ChatHistory.empty,
         val bannedIPs: Set<String> = setOf(),
         private val usersAndIds: Bijection<ChatUser, Long> = BijectionMap()) {
+
+    fun setCommands(commands:Map<String, (CommandParameters) -> ChatServerState>): ChatServerState {
+        return this.copy(commands = commands)
+    }
 
     fun registerUser(userName: String, clientHandlerID: Long, permission: ChatUser.Level = ChatUser.Level.NORMAL): ChatServerState {
         return usernameValidateAndInsert(userName, clientHandlerID, permission).second
@@ -269,7 +273,7 @@ data class ChatServerState (
         if (room.name != Constants.mainRoomName && !room.isUserInRoom(user) && userOverride == null)
             return appendOutput(ServerOutput.userCannotAddressRoomMessage(room.name, responseCliendID))
 
-        val result = Interpreter(content, this, user, room).result
+        val result = Interpreter(content, this, user, room, commands).result
 
         return result
 

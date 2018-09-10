@@ -1,10 +1,15 @@
+import java.io.File
+import java.io.PrintStream
 import java.time.LocalDateTime
 import java.time.ZoneId
 
 
-object Commands {
+class Commands(pluginDirectory: File? = null, errorStream: PrintStream? = null) {
 
-    const val textMessage = ""
+    companion object {
+        const val textMessage = ""
+        val emptyCommands: Map<String, (CommandParameters) -> ChatServerState> = mapOf()
+    }
 
     val basicCommands: Map<String, (CommandParameters) -> ChatServerState> = mapOf (
 
@@ -549,7 +554,16 @@ object Commands {
 
     )
 
-    val allCommands = basicCommands
+    val plugins: Map<String, (CommandParameters) -> ChatServerState> =
+        if (pluginDirectory != null && pluginDirectory.exists() && pluginDirectory.isDirectory) {
+            PluginManager(pluginDirectory.absolutePath, basicCommands, errorStream).commands
+        } else {
+            errorStream?.println("Plugins Warning: Could not find specified plugin directory.")
+            mapOf()
+        }
+
+
+    val allCommands = basicCommands + plugins
 
     private fun getTimestampIfPossible(time: String?, isStart: Boolean = false): Long? {
 
