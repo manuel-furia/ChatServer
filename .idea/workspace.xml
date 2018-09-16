@@ -2,124 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fbcf7e4b-fc6b-4267-829b-8927738fbd54" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Bijection.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Bijection.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/BijectionMap$Companion$distinctPairsSafeExceptLast$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/BijectionMap$Companion$distinctPairsSafeExceptLast$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/BijectionMap$Companion$distinctPairsUnsafe$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/BijectionMap$Companion$distinctPairsUnsafe$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/BijectionMap$Companion.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/BijectionMap$Companion.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/BijectionMap$removeByCodomainElement$pair$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/BijectionMap$removeByCodomainElement$pair$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/BijectionMap$removeByDomainElement$pair$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/BijectionMap$removeByDomainElement$pair$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/BijectionMap.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/BijectionMap.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ChatHistory$Companion.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ChatHistory$Companion.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ChatHistory$Entry.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ChatHistory$Entry.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ChatHistory$join$$inlined$sortedBy$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ChatHistory$join$$inlined$sortedBy$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ChatHistory.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ChatHistory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ChatRoom$UserPermissions.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ChatRoom$UserPermissions.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ChatRoom.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ChatRoom.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ChatServerListener$checkPings$$inlined$forEach$lambda$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ChatServerListener$checkPings$$inlined$forEach$lambda$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ChatServerListener$listen$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ChatServerListener$listen$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ChatServerListener$listen$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ChatServerListener$listen$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ChatServerListener$listen$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ChatServerListener$listen$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ChatServerListener$listen$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ChatServerListener$listen$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ChatServerListener$messageFromUserToRoom$$inlined$forEach$lambda$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ChatServerListener$messageFromUserToRoom$$inlined$forEach$lambda$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ChatServerListener$processOutputFromServer$$inlined$forEach$lambda$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ChatServerListener$processOutputFromServer$$inlined$forEach$lambda$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ChatServerListener$processOutputFromServer$$inlined$forEach$lambda$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ChatServerListener$processOutputFromServer$$inlined$forEach$lambda$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ChatServerListener$processOutputFromServer$$inlined$forEach$lambda$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ChatServerListener$processOutputFromServer$$inlined$forEach$lambda$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ChatServerListener$serviceMessageToClient$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ChatServerListener$serviceMessageToClient$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ChatServerListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ChatServerListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ChatServerState.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ChatServerState.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ChatUser$Level.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ChatUser$Level.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ChatUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ChatUser.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ClientHandler$WhenMappings.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ClientHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ClientMessageEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ClientMessageEvent.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/CommandParameters.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/CommandParameters.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$Companion.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Commands$Companion.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$10.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$11.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$12.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$13.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$13.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$14.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$14.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$15$$special$$inlined$sortedBy$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$15$$special$$inlined$sortedBy$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$15$$special$$inlined$sortedBy$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$15$$special$$inlined$sortedBy$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$15.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$15.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$16.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$16.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$17$formatFunc$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$17.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$17.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$18$formatFunc$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$18.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$18.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$19.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$19.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$20.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$20.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$21.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$21.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$22.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$22.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$23.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$23.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$9.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Commands.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Constants.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Constants.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Interpreter$result$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Interpreter$result$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Interpreter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Interpreter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/MainKt.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/MainKt.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Plugin$commands$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Plugin$commands$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Plugin.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Plugin.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/PluginManager$commands$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/PluginManager$commands$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/PluginManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/PluginManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ServerConsole.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ServerConsole.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ServerMessageEvent$Action.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ServerMessageEvent$Action.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ServerMessageEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ServerMessageEvent.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ServerOutput$BanClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ServerOutput$BanClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ServerOutput$Companion.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ServerOutput$Companion.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ServerOutput$DropClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ServerOutput$DropClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ServerOutput$KnownUserLeftNotification.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ServerOutput$KnownUserLeftNotification.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ServerOutput$LiftBan.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ServerOutput$LiftBan.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ServerOutput$MessageFromUserToRoom.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ServerOutput$MessageFromUserToRoom.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ServerOutput$None.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ServerOutput$None.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ServerOutput$Ping.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ServerOutput$Ping.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ServerOutput$Schedule.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ServerOutput$Schedule.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ServerOutput$ServiceMessageToClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ServerOutput$ServiceMessageToClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ServerOutput$ServiceMessageToEverybody.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ServerOutput$ServiceMessageToEverybody.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ServerOutput$ServiceMessageToRoom.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ServerOutput$ServiceMessageToRoom.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ServerOutput$UnknownUserLeftNotification.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ServerOutput$UnknownUserLeftNotification.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ServerOutput$UserJoinedNotification.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ServerOutput$UserJoinedNotification.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ServerOutput$UserNameChangedNotification.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ServerOutput$UserNameChangedNotification.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ServerOutput.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ServerOutput.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/TopChatter$UpdateType.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/TopChatter$UpdateType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/TopChatter$WhenMappings.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/TopChatter$WhenMappings.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/TopChatter$topChattersMessage$$inlined$sortedByDescending$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/TopChatter$topChattersMessage$$inlined$sortedByDescending$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/TopChatter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/TopChatter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Utils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Bijection.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Bijection.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BijectionMap.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/BijectionMap.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ChatHistory.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatHistory.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ChatRoom.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatRoom.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ChatServerListener.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatServerListener.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ChatServerState.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatServerState.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ChatUser.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatUser.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ClientHandler.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/TCPClientHandler.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ClientMessageEvent.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/ClientMessageEvent.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CommandParameters.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/CommandParameters.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Commands.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Commands.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Constants.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Constants.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Interpreter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interpreter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Observable.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Observable.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Observer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Observer.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Plugin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Plugin.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PluginManager.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/PluginManager.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SelectiveObservable.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/SelectiveObservable.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ServerConsole.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/ServerConsole.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ServerMessageEvent.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/ServerMessageEvent.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ServerOutput.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/ServerOutput.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TopChatter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/TopChatter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Utils.kt" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -141,26 +24,26 @@
         <counts>
           <entry key="ScriptEngineFactory" value="1" />
           <entry key="class" value="10" />
-          <entry key="kt" value="116" />
+          <entry key="kt" value="118" />
           <entry key="kts" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CLASS" value="10" />
-          <entry key="Kotlin" value="117" />
+          <entry key="Kotlin" value="119" />
           <entry key="SPI" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="kt" value="37113" />
+          <entry key="kt" value="37432" />
           <entry key="kts" value="52" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Kotlin" value="37165" />
+          <entry key="Kotlin" value="37484" />
         </counts>
       </usages-collector>
     </session>
@@ -177,10 +60,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ServerMessageEvent.kt">
+        <entry file="file://$PROJECT_DIR$/src/Plugin.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="30" selection-start-line="6" selection-start-column="30" selection-end-line="6" selection-end-column="30" />
+            <state relative-caret-position="15">
+              <caret line="12" column="6" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/PluginManager.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="600">
+              <caret line="41" column="52" selection-start-line="41" selection-start-column="52" selection-end-line="41" selection-end-column="52" />
             </state>
           </provider>
         </entry>
@@ -188,17 +80,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ThreadedClient.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" column="41" lean-forward="true" selection-start-line="10" selection-start-column="41" selection-end-line="10" selection-end-column="41" />
+            <state relative-caret-position="135">
+              <caret line="15" column="12" lean-forward="true" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Constants.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="23" column="38" lean-forward="true" selection-start-line="23" selection-start-column="38" selection-end-line="23" selection-end-column="38" />
+            <state relative-caret-position="315">
+              <caret line="21" column="48" lean-forward="true" selection-start-line="21" selection-start-column="48" selection-end-line="21" selection-end-column="48" />
             </state>
           </provider>
         </entry>
@@ -206,8 +98,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Commands.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1386">
-              <caret line="446" column="42" lean-forward="true" selection-start-line="446" selection-start-column="42" selection-end-line="446" selection-end-column="42" />
+            <state relative-caret-position="-375">
+              <caret line="533" column="92" selection-start-line="533" selection-start-column="92" selection-end-line="533" selection-end-column="92" />
             </state>
           </provider>
         </entry>
@@ -233,7 +125,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ChatServerListener.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
+            <state relative-caret-position="-2790">
               <caret line="96" selection-start-line="96" selection-end-line="96" />
             </state>
           </provider>
@@ -242,17 +134,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/TCPClientHandler.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="55">
+            <state relative-caret-position="460">
               <caret line="52" selection-start-line="52" selection-end-line="52" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ChatServerState.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="298">
-              <caret line="346" column="12" selection-start-line="346" selection-start-column="12" selection-end-line="346" selection-end-column="12" />
             </state>
           </provider>
         </entry>
@@ -299,7 +182,6 @@
         <option value="$PROJECT_DIR$/src/Interpreter.kt" />
         <option value="$PROJECT_DIR$/src/Observable.kt" />
         <option value="$PROJECT_DIR$/src/Observer.kt" />
-        <option value="$PROJECT_DIR$/src/Commands.kt" />
         <option value="$PROJECT_DIR$/src/Plugin.kt" />
         <option value="$PROJECT_DIR$/src/PluginManager.kt" />
         <option value="$PROJECT_DIR$/src/SelectiveObservable.kt" />
@@ -312,6 +194,7 @@
         <option value="$PROJECT_DIR$/src/Main.kt" />
         <option value="$PROJECT_DIR$/src/TopChatter.kt" />
         <option value="$PROJECT_DIR$/src/Constants.kt" />
+        <option value="$PROJECT_DIR$/src/Commands.kt" />
       </list>
     </option>
   </component>
@@ -359,7 +242,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1537129185060" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1537135357122" />
     <property name="last_opened_file_path" value="$APPLICATION_HOME_DIR$/plugins/Kotlin/lib/kotlin-script-util.jar!/" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
@@ -423,7 +306,7 @@
     <frame x="-3" y="31" width="1606" height="872" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16816431" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16816431" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -433,7 +316,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.328877" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.328877" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.58921695" visible="true" weight="0.39973262" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.58921695" visible="true" weight="0.39973262" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.328877" />
@@ -575,26 +458,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Plugin.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-5">
-          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
-          <folding>
-            <element signature="e#55#232#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/PluginManager.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="41" column="52" selection-start-line="41" selection-start-column="52" selection-end-line="41" selection-end-column="52" />
-          <folding>
-            <element signature="e#55#101#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/SelectiveObservable.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
@@ -696,41 +559,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ChatServerListener.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="96" selection-start-line="96" selection-end-line="96" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/TCPClientHandler.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="55">
-          <caret line="52" selection-start-line="52" selection-end-line="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ThreadedClient.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="41" lean-forward="true" selection-start-line="10" selection-start-column="41" selection-end-line="10" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="25" lean-forward="true" selection-start-line="12" selection-start-column="25" selection-end-line="12" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Commands.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1386">
-          <caret line="446" column="42" lean-forward="true" selection-start-line="446" selection-start-column="42" selection-end-line="446" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ServerConsole.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="565">
@@ -745,10 +573,59 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="25" lean-forward="true" selection-start-line="12" selection-start-column="25" selection-end-line="12" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ChatServerListener.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2790">
+          <caret line="96" selection-start-line="96" selection-end-line="96" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ThreadedClient.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="15" column="12" lean-forward="true" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/TCPClientHandler.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="52" selection-start-line="52" selection-end-line="52" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Constants.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="23" column="38" lean-forward="true" selection-start-line="23" selection-start-column="38" selection-end-line="23" selection-end-column="38" />
+        <state relative-caret-position="315">
+          <caret line="21" column="48" lean-forward="true" selection-start-line="21" selection-start-column="48" selection-end-line="21" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Commands.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-375">
+          <caret line="533" column="92" selection-start-line="533" selection-start-column="92" selection-end-line="533" selection-end-column="92" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Plugin.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="12" column="6" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PluginManager.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="600">
+          <caret line="41" column="52" selection-start-line="41" selection-start-column="52" selection-end-line="41" selection-end-column="52" />
         </state>
       </provider>
     </entry>

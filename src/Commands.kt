@@ -6,7 +6,7 @@
  * The anonymous function that represents the command takes a CommandParameters object, containing a server state,
  * information on the user that issued the command and the room it was destined for. The anonymous function returns an
  * updated server state.
- * To add an additional command, insert an addicional element in the basicCommands map.
+ * To add an additional command, insert an additional element in the basicCommands map.
  * The allCommands map includes also commands loaded at runtime from plugins.
  */
 
@@ -53,7 +53,8 @@ class Commands(pluginDirectory: File? = null, errorStream: PrintStream? = null) 
                     params.server.appendOutput(ServerOutput.roomPermissionDenied(permissions, ChatRoom.UserPermissions.VOICE, params.clientID))
                 }
             },
-            //Change username
+            //Change/Set username
+            //:user newname
             ":user" to {params ->
                 //Fetch the new username from the argument line
                 val newUsername = getArgumentByIndex(params.argumentLine, 0)
@@ -162,6 +163,7 @@ class Commands(pluginDirectory: File? = null, errorStream: PrintStream? = null) 
                 params.server.removeUser(params.user.username)
             },
             //Try to login as admin by providing admin username and password
+            //:admin admin_name password
             ":admin" to {params ->
 
                 val adminUsername = getArgumentByIndex(params.argumentLine, 0)
@@ -170,6 +172,7 @@ class Commands(pluginDirectory: File? = null, errorStream: PrintStream? = null) 
                 params.server.becomeAdmin(adminUsername, adminPassword, params.user)
             },
             //Create a new room or join an existing one
+            //:room room_name
             ":room" to {params ->
                 if (params.user.level < ChatUser.Level.NORMAL) {
                     //An anonymous user can not create a room
@@ -229,6 +232,12 @@ class Commands(pluginDirectory: File? = null, errorStream: PrintStream? = null) 
                 }
             },
             //Modify the permissions of a user
+            //Examples:
+            //:grant ADMIN user
+            //:grant MOD user
+            //:grant VOICE user
+            //:grant READ user
+            //:grant NONE user
             ":grant" to {params ->
                 val issuerPermissions = params.room.getPermissionsFor(params.user)
                 val newPermissionString = getArgumentByIndex(params.argumentLine, 0)
@@ -265,6 +274,7 @@ class Commands(pluginDirectory: File? = null, errorStream: PrintStream? = null) 
                 }
             },
             //Kick a user out of the server
+            //:KICK username
             ":KICK" to {params ->
                 val username = getArgumentByIndex(params.argumentLine, 0)
                 val user = params.server.getUserByUsername(username)
@@ -276,6 +286,7 @@ class Commands(pluginDirectory: File? = null, errorStream: PrintStream? = null) 
                 }
             },
             //Ban a user's ip address from the server
+            //:BAN username
             ":BAN" to {params ->
                 val username = getArgumentByIndex(params.argumentLine, 0)
                 val user = params.server.getUserByUsername(username)
@@ -292,6 +303,7 @@ class Commands(pluginDirectory: File? = null, errorStream: PrintStream? = null) 
                 }
             },
             //Lift an ip address ban
+            //:UNBAN ip_address
             ":UNBAN" to {params ->
                 val ipaddr = getArgumentByIndex(params.argumentLine, 0)
                 if (params.user.level >= ChatUser.Level.ADMIN)
@@ -301,6 +313,7 @@ class Commands(pluginDirectory: File? = null, errorStream: PrintStream? = null) 
 
             },
             //Set the greeting message shown to a user when they join a room
+            //:topic greeting_message
             ":topic" to {params ->
                 val topic = params.argumentLine.trim()
                 val permissions = params.room.getPermissionsFor(params.user)
@@ -518,6 +531,7 @@ class Commands(pluginDirectory: File? = null, errorStream: PrintStream? = null) 
                 }
             },
             //Set a command to be executed, or a message to be displayed, later in time
+            //:schedule 3 hello world!         (Write "hello world!" three seconds from now)
             ":schedule" to {params ->
                 if (params.user.level < ChatUser.Level.NORMAL) {
                     params.server.appendOutput(ServerOutput.permissionDenied(params.user.level, ChatUser.Level.NORMAL, params.clientID))
