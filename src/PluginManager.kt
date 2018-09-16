@@ -1,3 +1,11 @@
+//Author: Manuel Furia
+//Student ID: 1706247
+
+/* PluginManager.kt
+ * Loads plugins as .kts files from a specified directory, and issues a warning if plugins are conflicting between
+ * each other or with basic commands
+ */
+
 import java.io.File
 import java.io.PrintStream
 
@@ -27,6 +35,7 @@ class PluginManager (val directory: String, basicCommands: Map<String, (CommandP
                     }
                 }
             }
+            //Print warning messages if a plugin redefines a basic server command
             for (i in commandMaps.indices){
                 for (elem in basicCommands) {
                     if (commandMaps[i].second.keys.contains(elem.key)){

@@ -1,46 +1,61 @@
-class ServerConsole(observer: Observer<ClientMessageEvent>, observable: Observable<ServerMessageEvent>): Observer<ServerMessageEvent>, Observable<ClientMessageEvent>, Runnable {
+import java.io.*
 
-    private val observer: Observer<ClientMessageEvent> = observer
+//Author: Manuel Furia
+//Student ID: 1706247
 
-    val uid = 0L
+/*
+ * Always present client that operates from the terminal of the server application, with admin privileges.
+ * Can see the messages of all users in all rooms (:messages all).
+ */
+
+/**
+ * Always present client that operates from the terminal of the server application, with admin privileges.
+ * @param uid Unique ID of the client
+ * @param input BufferedReader from which to read the user input
+ * @param output PrintStream to which the messages and other output will be written
+ * @param observer The server that will observe this client
+ * @param observable The server that this client will observe
+ */
+
+class ServerConsole(
+        uid: Long,
+        val input: BufferedReader, //
+        val output: PrintStream,
+        observer: Observer<ClientMessageEvent>,
+        observable: Observable<ServerMessageEvent>)
+    : ThreadedClient(uid, observer, observable), Runnable {
+
 
     override fun run() {
-        while (true) {
+        super.run()
+        while (running) {
             try {
-                val text = readLine() ?: ""
-
+                val text = input.readLine() ?: ""
+                //Notify the listening servers of the text written on this server's terminal
                 notifyObservers(ClientMessageEvent(this, text))
-
             } catch (ex: Exception) {
                 error("")
             }
         }
     }
 
+    /**
+     * Received a message from the server
+     */
     override fun update(event: ServerMessageEvent) {
         when (event.action){
-            ServerMessageEvent.Action.MESSAGE -> print(event.msg)
-            ServerMessageEvent.Action.PING -> println(":- Somebody is pinging the server console. :D")
-            ServerMessageEvent.Action.STOP -> {} //You can't stop the server console
+            ServerMessageEvent.Action.MESSAGE -> output.print(event.msg)
+            ServerMessageEvent.Action.PING -> {
+                output.println(":- ${event.msg?.replace(" from ", "") ?: "Somebody"} is pinging the server console. :D")
+            }
+            ServerMessageEvent.Action.STOP -> {stop()}
             ServerMessageEvent.Action.TIMEOUT -> {} //The server console does not timeout
-            ServerMessageEvent.Action.USER_CHANGE -> {}
+            ServerMessageEvent.Action.USER_CHANGE -> {} //Nothing to do if the user list changes
             ServerMessageEvent.Action.USER_JOINED -> {}
             ServerMessageEvent.Action.KNOWN_USER_LEFT -> {}
             ServerMessageEvent.Action.UNKNOWN_USER_LEFT -> {}
-            ServerMessageEvent.Action.ERROR -> println("Server Error: " + event.msg)
+            ServerMessageEvent.Action.ERROR -> output.println("Server Error: " + event.msg)
         }
-    }
-
-    override fun registerObserver(observer: Observer<ClientMessageEvent>) {
-        //Do nothing. The observer is only the server specified in the constructor, and it is unchangeable
-    }
-
-    override fun unregisterObserver(observer: Observer<ClientMessageEvent>) {
-        //Do nothing. The observer is only the server specified in the constructor, and it is unchangeable
-    }
-
-    override fun notifyObservers(event: ClientMessageEvent) {
-        observer?.update(event)
     }
 
 

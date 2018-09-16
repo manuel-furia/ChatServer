@@ -1,6 +1,9 @@
+//Author: Manuel Furia
+//Student ID: 1706247
 
-import sun.net.www.ParseUtil.toURI
-import java.io.File
+/**
+ * The main function of the program, creating and invoking the server
+ */
 
 fun main(args: Array<String>){
 
@@ -13,4 +16,11 @@ fun main(args: Array<String>){
     val listener = ChatServerListener(ChatServerState(), port, pluginsFolder)
 
     listener.listen(topChatterBot = true)
+
+    //NOTE: Because the readLine in the ServerConsole thread is blocking, the thread can not be terminated, so the
+    //      program will keep on running after a :STOP command issued by a remote admin
+    //      (but the other threads will all be shut down cleanly)
+    //      System.exit(0) is a temporary fix that closes the hanging thread forcefully,
+    //      but a better solution will be necessary in the future
+    System.exit(0)
 }

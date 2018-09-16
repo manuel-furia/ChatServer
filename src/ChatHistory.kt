@@ -1,3 +1,12 @@
+//Author: Manuel Furia
+//Student ID: 1706247
+
+/* ChatHistory.kt
+ * Stores the history of the messages in a server, offers means to make queries based on text, username, room name and time
+ * and allows to get the message data in various text formats.
+ * Contains classes ChatHistory and ChatHistory.Entry
+ */
+
 import java.text.SimpleDateFormat
 import java.util.*
 

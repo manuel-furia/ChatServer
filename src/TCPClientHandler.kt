@@ -1,27 +1,38 @@
+//Author: Manuel Furia
+//Student ID: 1706247
+
+/* TCPClientHandler.kt
+ * Handle tcp communication with a tcp client, notifying the server of new messages from the client and sending
+ * server messages to the client.
+ * The class inherits from ThreadedClient, which implements the Observer/Observable pattern for a generic client and
+ * provides thread handling functionality (running and stopping when necessary)
+ */
+
 import java.io.OutputStream
 import java.net.Socket
 import java.nio.charset.Charset
 import java.util.*
 
-class ClientHandler(val uid: Long, tcpClient: Socket, observer: Observer<ClientMessageEvent>, observable: Observable<ServerMessageEvent>): Observer<ServerMessageEvent>, Observable<ClientMessageEvent>, Runnable {
+/**
+ * TCP client connected to the server.
+ * @param uid Unique ID of the client
+ * @param tcpClient Socket representing the TCP connection between server and client
+ * @param observer The server that will observe this client handler
+ * @param observable The server that this client handler will observe
+ */
+class TCPClientHandler(uid: Long, tcpClient: Socket, observer: Observer<ClientMessageEvent>, observable: Observable<ServerMessageEvent>)
+    : ThreadedClient(uid, observer, observable), Runnable {
+
+    //Handles the client TCP connection
     private val client: Socket = tcpClient
-    private val observable: Observable<ServerMessageEvent> = observable
+    //Reader and writer for the TCP connection
     private val reader: Scanner = Scanner(tcpClient.getInputStream())
     private val writer: OutputStream = tcpClient.getOutputStream()
 
-    private var observer: Observer<ClientMessageEvent>? = observer
-
-    var running: Boolean = false
-    private set
-
     val hostAddress = tcpClient.inetAddress.hostAddress
 
-    init {
-        observable.registerObserver(this)
-    }
-
     override fun run() {
-        running = true
+        super.run() //Tell the superclass (ThreadedClient) that we are running
 
         while (running) {
             try {
@@ -35,23 +46,10 @@ class ClientHandler(val uid: Long, tcpClient: Socket, observer: Observer<ClientM
         }
     }
 
-    override fun registerObserver(observer: Observer<ClientMessageEvent>) {
-        this.observer = observer
-    }
-
-    override fun unregisterObserver(observer: Observer<ClientMessageEvent>) {
-        this.observer = null
-    }
-
-    override fun notifyObservers(event: ClientMessageEvent) {
-        observer?.update(event)
-    }
-
-
     override fun update(event: ServerMessageEvent) {
         when (event.action){
             ServerMessageEvent.Action.MESSAGE -> if (event.msg != null) send(event.msg)
-            ServerMessageEvent.Action.PING -> send("TODO: Implement ping")
+            ServerMessageEvent.Action.PING -> send(Constants.pingString + event.msg)
             ServerMessageEvent.Action.STOP -> stop()
             ServerMessageEvent.Action.TIMEOUT -> stop()
             ServerMessageEvent.Action.USER_JOINED -> {}
@@ -66,10 +64,9 @@ class ClientHandler(val uid: Long, tcpClient: Socket, observer: Observer<ClientM
         writer.write(message.toByteArray(Charset.defaultCharset()))
     }
 
-    private fun stop() {
-        running = false
-        observable.unregisterObserver(this)
+    override fun stop() {
         client.close()
+        super.stop() //Stop the thread
     }
 
     private fun error(msg: String) {

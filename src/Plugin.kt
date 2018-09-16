@@ -1,8 +1,13 @@
+//Author: Manuel Furia
+//Student ID: 1706247
+
+/* Plugin.kt
+ * Handles dynamically loading plugins from files. It requires the kotlin scripting dependencies to be properly set.
+ * If it fails, it produces a warning and an empty result, without crashing.
+ */
+
 import java.io.File
-import java.io.OutputStream
 import java.io.PrintStream
-import javax.script.Bindings
-import javax.script.ScriptContext
 import javax.script.ScriptEngineManager
 
 class Plugin (val filename: String, errStream: PrintStream?) {

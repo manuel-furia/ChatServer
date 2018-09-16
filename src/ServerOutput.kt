@@ -1,32 +1,47 @@
+//Author: Manuel Furia
+//Student ID: 1706247
+
+/* ServerOutput.kt
+ * ServerOutput is an algebraic data type (ADT) that can represent a value of different type depending on the kind of
+ * server output action required.
+ * A list of ServerOutput will be present in the server state and executed at the end of its construction by ChatServerListener.
+ * ServerOutput also contains a companion object with utility methods to create the appropriate ServerOutput,
+ * with relevant text message output, for different type of events.
+ */
+
 sealed class ServerOutput {
-
+    //No action
     object None : ServerOutput()
-
-    class ServiceMessageToClient(val msg: String, val clientID: Long): ServerOutput()
-
-    class ServiceMessageToRoom(val msg: String, val roomName: String): ServerOutput()
-
-    class ServiceMessageToEverybody(val msg: String): ServerOutput()
-
-    class UserJoinedNotification(val user: String): ServerOutput()
-
-    class UserNameChangedNotification(val user: String): ServerOutput()
-
-    class KnownUserLeftNotification(val user: String): ServerOutput()
-
-    class UnknownUserLeftNotification(val user: String): ServerOutput()
-
-    class DropClient(val clientID: Long): ServerOutput()
-
-    class BanClient(val clientID: Long): ServerOutput()
-
-    class LiftBan(val bannedIP: String): ServerOutput()
-
-    class Schedule(val timestamp: Long, val action: String, val user: ChatUser, val room: ChatRoom): ServerOutput()
-
-    class MessageFromUserToRoom(val message: ChatHistory.Entry): ServerOutput()
-
-    class Ping(val clientID: Long): ServerOutput()
+    //Service message from the server to a specific client
+    data class ServiceMessageToClient(val msg: String, val clientID: Long): ServerOutput()
+    //Service message from the server to all clients in a specific room
+    data class ServiceMessageToRoom(val msg: String, val roomName: String): ServerOutput()
+    //Service message from the server to everybody
+    data class ServiceMessageToEverybody(val msg: String): ServerOutput()
+    //Produced when a user joins the server
+    data class UserJoinedNotification(val user: String): ServerOutput()
+    //Produced when a user changes their name
+    data class UserNameChangedNotification(val user: String): ServerOutput()
+    //Produced when an anonymous user leaves the server
+    data class KnownUserLeftNotification(val user: String): ServerOutput()
+    //Produced when a named user leaves the server
+    data class UnknownUserLeftNotification(val user: String): ServerOutput()
+    //Drop the specified client
+    data class DropClient(val clientID: Long): ServerOutput()
+    //Ban the specified client's IP address
+    data class BanClient(val clientID: Long): ServerOutput()
+    //Unban a banned IP address
+    data class LiftBan(val bannedIP: String): ServerOutput()
+    //Execute an action (message or command) later (at a specific timestamp)
+    data class Schedule(val timestamp: Long, val action: String, val user: ChatUser, val room: ChatRoom): ServerOutput()
+    //Send a message from one user to a room
+    data class MessageFromUserToRoom(val message: ChatHistory.Entry): ServerOutput()
+    //Server pings a client
+    data class Ping(val clientID: Long): ServerOutput()
+    //User pings another user
+    data class PingUser(val fromUser: ChatUser, val toUser: ChatUser): ServerOutput()
+    //Disconnect all the clients, terminate all the threads and halt the server
+    class Stop(): ServerOutput()
 
     companion object {
 

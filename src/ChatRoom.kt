@@ -1,7 +1,14 @@
-import java.util.*
+//Author: Manuel Furia
+//Student ID: 1706247
+
+/* ChatRoom.kt
+ * Represents a room in the server. The messages in the room are visible only to users that joined it.
+ */
+
+import java.util.* //Used in the custom equals/hashCode methods
 
 /**
- * Represents a room in the server. The messages in the room are visible only to users that joined it.
+ * Represents a room in the server.
  */
 data class ChatRoom (val name: String,
                 val greeting: String = "", //Message to be shown when a user logs in
@@ -91,7 +98,6 @@ data class ChatRoom (val name: String,
     }
 
     //The following methods manipulate the whitelist and blacklist lists.
-
     fun blacklistAdd(user: ChatUser): ChatRoom = this.copy(name, blacklist = blacklist + user)
     fun whitelistAdd(user: ChatUser): ChatRoom = this.copy(name, whitelist = whitelist + user)
     fun blacklistRemove(user: ChatUser): ChatRoom = this.copy(name, blacklist = blacklist - user)

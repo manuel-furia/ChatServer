@@ -1,3 +1,10 @@
+//Author: Manuel Furia
+//Student ID: 1706247
+
+/* Constants.kt
+ * Singleton containing constants used in the server
+ */
+
 object Constants {
 
 
@@ -16,7 +23,7 @@ object Constants {
     const val roomAlignmentPadding = 8
     const val maxNonAdminSchedule = 60
     const val pingTimeoutCheckEverySeconds = 10
-    const val pingTimeoutAfterSeconds = 60
+    const val pingTimeoutAfterSeconds = 600
     const val serverMessagePrefix = ":-"
     const val pingString = ":PING:"
     const val defaultQueryMinutesAgo = 10
