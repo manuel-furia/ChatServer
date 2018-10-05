@@ -12,8 +12,10 @@ fun main(args: Array<String>){
 
     val pluginsFolder = params.get("--plugins")
     val port = params.get("--port")?.toIntOrNull() ?: 61673
+    val mode = params.get("--mode")
+    val validMode = if (mode == "plain" || mode == "rich") mode else "rich"
 
-    val listener = ChatServerListener(ChatServerState(), port, pluginsFolder)
+    val listener = ChatServerListener(ChatServerState(), port, pluginsFolder, mode == "plain")
 
     listener.listen(topChatterBot = true)
 

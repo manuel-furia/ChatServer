@@ -16,7 +16,8 @@ import kotlin.concurrent.thread
 /**
  * Accept and manages clients, input and output for the chat server.
  */
-class ChatServerListener (serverState: ChatServerState, val port: Int, val pluginDirectory: String? = null) : Observer<ClientMessageEvent>, SelectiveObservable<ServerMessageEvent> {
+class ChatServerListener (serverState: ChatServerState, val port: Int, val pluginDirectory: String? = null, val plainMode: Boolean = true)
+    : Observer<ClientMessageEvent>, SelectiveObservable<ServerMessageEvent> {
 
     /**
      * Contains the logical state of the server
@@ -234,6 +235,8 @@ class ChatServerListener (serverState: ChatServerState, val port: Int, val plugi
      * Send a message from one user to all the clients in one room
      */
     private fun messageFromUserToRoom(message: ChatHistory.Entry): Unit {
+        val messageText = (if (plainMode) message.toFormattedMessage() else message.toDataMessage()) + "\n"
+
         serverState
                 .getUsersInRoom(message.room.name)
                 .filter {user -> message.room.canUserRead(user) } //Send only to user with at least READ permissions
@@ -242,7 +245,7 @@ class ChatServerListener (serverState: ChatServerState, val port: Int, val plugi
                     fetchServerMessageObserver(id) {
                         notifyObserver(
                                 it,
-                                ServerMessageEvent(ServerMessageEvent.Action.MESSAGE, serverState, message.toFormattedMessage() + "\n")
+                                ServerMessageEvent(ServerMessageEvent.Action.MESSAGE, serverState, messageText)
                         )
                     }
                 }
@@ -374,7 +377,8 @@ class ChatServerListener (serverState: ChatServerState, val port: Int, val plugi
                 lastPings.put(uid, System.currentTimeMillis())
 
                 if (event.msg.startsWith(Constants.pingString) && event.msg.length <= Constants.pingString.length + System.lineSeparator().length) {
-                    return //Just a ping, we already recorded it. No more actions are needed.
+                    pingClientID(uid, "") //Ping back
+                    return
                 } else if (event.stopped){ //The client handler notified that its thread has been stopped
                     clients = clients.removeByDomainElement(event.sender) //Remove the client
                 } else { //A normal message or command

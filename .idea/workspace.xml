@@ -2,7 +2,55 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fbcf7e4b-fc6b-4267-829b-8927738fbd54" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/Commands.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Commands.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ChatServerListener$checkPings$$inlined$forEach$lambda$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ChatServerListener$checkPings$$inlined$forEach$lambda$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ChatServerListener$listen$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ChatServerListener$listen$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ChatServerListener$listen$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ChatServerListener$listen$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ChatServerListener$listen$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ChatServerListener$listen$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ChatServerListener$listen$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ChatServerListener$listen$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ChatServerListener$messageFromUserToRoom$$inlined$forEach$lambda$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ChatServerListener$messageFromUserToRoom$$inlined$forEach$lambda$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ChatServerListener$pingClientID$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ChatServerListener$pingClientID$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ChatServerListener$processOutputFromServer$$inlined$forEach$lambda$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ChatServerListener$processOutputFromServer$$inlined$forEach$lambda$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ChatServerListener$processOutputFromServer$$inlined$forEach$lambda$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ChatServerListener$processOutputFromServer$$inlined$forEach$lambda$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ChatServerListener$processOutputFromServer$$inlined$forEach$lambda$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ChatServerListener$processOutputFromServer$$inlined$forEach$lambda$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ChatServerListener$serviceMessageToClient$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ChatServerListener$serviceMessageToClient$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/ChatServerListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/ChatServerListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$10.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$11.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$12.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$13.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$13.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$14.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$14.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$15$$special$$inlined$sortedBy$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$15$$special$$inlined$sortedBy$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$15.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$15.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$16$formatFunc$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$16$formatFunc$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$16.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$16.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$17.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$17.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$18.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$18.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$19.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$19.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$20.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$20.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$21.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$21.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$22.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$22.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$23.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$23.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$24.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$24.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$25.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$25.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$3$$special$$inlined$sortedBy$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$3$$special$$inlined$sortedBy$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$3$$special$$inlined$sortedBy$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$3$$special$$inlined$sortedBy$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$3$$special$$inlined$sortedBy$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$3$$special$$inlined$sortedBy$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$4$formatFunc$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$4$formatFunc$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$7.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$8.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Commands$basicCommands$9.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/Commands.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/Commands.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/MainKt.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/MainKt.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChatServer/TCPClientHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChatServer/TCPClientHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ChatServerListener.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatServerListener.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TCPClientHandler.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/TCPClientHandler.kt" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -15,35 +63,41 @@
     <session id="-1869734761">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
+          <entry key="project.closed" value="2" />
+          <entry key="project.open.time.14" value="1" />
+          <entry key="project.open.time.15" value="1" />
+          <entry key="project.open.time.16" value="1" />
+          <entry key="project.open.time.21" value="1" />
+          <entry key="project.open.time.23" value="1" />
           <entry key="project.open.time.3" value="1" />
-          <entry key="project.open.time.8" value="1" />
-          <entry key="project.opened" value="2" />
+          <entry key="project.open.time.8" value="2" />
+          <entry key="project.opened" value="8" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="ScriptEngineFactory" value="1" />
           <entry key="class" value="10" />
-          <entry key="kt" value="118" />
+          <entry key="kt" value="151" />
           <entry key="kts" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CLASS" value="10" />
-          <entry key="Kotlin" value="119" />
+          <entry key="Kotlin" value="152" />
           <entry key="SPI" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="kt" value="37432" />
+          <entry key="kt" value="37702" />
           <entry key="kts" value="52" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Kotlin" value="37484" />
+          <entry key="Kotlin" value="37754" />
         </counts>
       </usages-collector>
     </session>
@@ -51,37 +105,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main.kt">
+        <entry file="file://$PROJECT_DIR$/src/ChatServerListener.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" column="25" lean-forward="true" selection-start-line="12" selection-start-column="25" selection-end-line="12" selection-end-column="25" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Plugin.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="12" column="6" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/PluginManager.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="600">
-              <caret line="41" column="52" selection-start-line="41" selection-start-column="52" selection-end-line="41" selection-end-column="52" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ThreadedClient.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="15" column="12" lean-forward="true" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
+            <state relative-caret-position="5670">
+              <caret line="381" column="50" selection-start-line="381" selection-start-column="50" selection-end-line="381" selection-end-column="50" />
             </state>
           </provider>
         </entry>
@@ -90,7 +117,52 @@
         <entry file="file://$PROJECT_DIR$/src/Constants.kt">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="315">
-              <caret line="21" column="48" lean-forward="true" selection-start-line="21" selection-start-column="48" selection-end-line="21" selection-end-column="48" />
+              <caret line="21" column="48" selection-start-line="21" selection-start-column="48" selection-end-line="21" selection-end-column="48" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Main.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="4" column="34" selection-start-line="4" selection-start-column="34" selection-end-line="4" selection-end-column="34" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ThreadedClient.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="705">
+              <caret line="47" column="33" selection-start-line="47" selection-start-column="33" selection-end-line="47" selection-end-column="33" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ServerOutput.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="555">
+              <caret line="37" column="31" selection-start-line="37" selection-start-column="31" selection-end-line="37" selection-end-column="31" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/TCPClientHandler.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="310">
+              <caret line="54" column="26" selection-start-line="54" selection-start-column="26" selection-end-line="54" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Bijection.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="435">
+              <caret line="29" column="31" selection-start-line="29" selection-start-column="31" selection-end-line="29" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -98,44 +170,26 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Commands.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-375">
-              <caret line="533" column="92" selection-start-line="533" selection-start-column="92" selection-end-line="533" selection-end-column="92" />
+            <state relative-caret-position="630">
+              <caret line="45" column="53" selection-start-line="45" selection-start-column="53" selection-end-line="45" selection-end-column="53" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/TopChatter.kt">
+        <entry file="file://$PROJECT_DIR$/src/ClientMessageEvent.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="37" lean-forward="true" selection-start-line="37" selection-end-line="37" />
+            <state relative-caret-position="210">
+              <caret line="14" column="77" selection-start-line="14" selection-start-column="77" selection-end-line="14" selection-end-column="77" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ServerConsole.kt">
+        <entry file="file://$PROJECT_DIR$/src/Interpreter.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="565">
-              <caret line="45" column="26" lean-forward="true" selection-start-line="45" selection-start-column="26" selection-end-line="45" selection-end-column="26" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ChatServerListener.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2790">
-              <caret line="96" selection-start-line="96" selection-end-line="96" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/TCPClientHandler.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="460">
-              <caret line="52" selection-start-line="52" selection-end-line="52" />
+            <state relative-caret-position="720">
+              <caret line="48" column="9" selection-start-line="48" selection-start-column="9" selection-end-line="48" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -188,21 +242,22 @@
         <option value="$PROJECT_DIR$/src/ServerMessageEvent.kt" />
         <option value="$PROJECT_DIR$/src/ServerOutput.kt" />
         <option value="$PROJECT_DIR$/src/ClientHandler.kt" />
-        <option value="$PROJECT_DIR$/src/ChatServerListener.kt" />
         <option value="$PROJECT_DIR$/src/ThreadedClient.kt" />
         <option value="$PROJECT_DIR$/src/ServerConsole.kt" />
-        <option value="$PROJECT_DIR$/src/Main.kt" />
         <option value="$PROJECT_DIR$/src/TopChatter.kt" />
         <option value="$PROJECT_DIR$/src/Constants.kt" />
         <option value="$PROJECT_DIR$/src/Commands.kt" />
+        <option value="$PROJECT_DIR$/src/Main.kt" />
+        <option value="$PROJECT_DIR$/src/ChatServerListener.kt" />
+        <option value="$PROJECT_DIR$/src/TCPClientHandler.kt" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="252" />
-    <option name="y" value="31" />
-    <option name="width" value="1269" />
-    <option name="height" value="833" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="335" />
+    <option name="y" value="65" />
+    <option name="width" value="1265" />
+    <option name="height" value="835" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -210,6 +265,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -236,13 +293,10 @@
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1537135357122" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1538678832928" />
     <property name="last_opened_file_path" value="$APPLICATION_HOME_DIR$/plugins/Kotlin/lib/kotlin-script-util.jar!/" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
@@ -303,10 +357,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-3" y="31" width="1606" height="872" extended-state="6" />
+    <frame x="335" y="65" width="1265" height="835" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16816431" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1807724" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -316,7 +370,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.328877" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.328877" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.58921695" visible="true" weight="0.39973262" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.58921695" visible="true" weight="0.39973262" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.328877" />
@@ -381,13 +435,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Utils.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" selection-start-line="5" selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Utils.kt" />
     <entry file="file://$PROJECT_DIR$/test/BijectionMapTest.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-335">
@@ -409,27 +457,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Bijection.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="660">
-          <caret line="44" lean-forward="true" selection-start-line="44" selection-end-line="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ChatRoom.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="14" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ChatUser.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="9" column="11" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/CommandParameters.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -437,38 +464,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Interpreter.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="720">
-          <caret line="48" column="9" lean-forward="true" selection-start-line="48" selection-start-column="9" selection-end-line="48" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Observable.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="22" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Observer.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="87" selection-start-line="4" selection-start-column="87" selection-end-line="4" selection-end-column="87" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/SelectiveObservable.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="12" column="1" lean-forward="true" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ServerOutput.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="30" lean-forward="true" selection-start-line="6" selection-start-column="30" selection-end-line="6" selection-end-column="30" />
         </state>
       </provider>
     </entry>
@@ -490,13 +489,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="133">
           <caret line="378" selection-start-line="378" selection-end-line="378" />
-          <folding>
-            <element signature="e#11153#11154#0" expanded="true" />
-            <element signature="e#11186#11187#0" expanded="true" />
-            <element signature="e#11879#11880#0" expanded="true" />
-            <element signature="e#11924#11925#0" expanded="true" />
-            <element signature="e#11972#11973#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -504,16 +496,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="133">
           <caret line="184" selection-start-line="184" selection-end-line="184" />
-          <folding>
-            <element signature="e#5955#5956#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ClientMessageEvent.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="77" selection-start-line="14" selection-start-column="77" selection-end-line="14" selection-end-column="77" />
         </state>
       </provider>
     </entry>
@@ -524,31 +506,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/BijectionMap.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="89" selection-start-line="89" selection-end-line="89" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ChatHistory.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1145">
-          <caret line="15" column="6" selection-start-line="15" selection-start-column="6" selection-end-line="15" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ServerMessageEvent.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="6" column="30" selection-start-line="6" selection-start-column="30" selection-end-line="6" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ChatServerState.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="346" column="12" selection-start-line="346" selection-start-column="12" selection-end-line="346" selection-end-column="12" />
         </state>
       </provider>
     </entry>
@@ -568,64 +529,148 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/TopChatter.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
+        <state relative-caret-position="555">
           <caret line="37" lean-forward="true" selection-start-line="37" selection-end-line="37" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.kt">
+    <entry file="file://$PROJECT_DIR$/src/PluginManager.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="25" lean-forward="true" selection-start-line="12" selection-start-column="25" selection-end-line="12" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ChatServerListener.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2790">
-          <caret line="96" selection-start-line="96" selection-end-line="96" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ThreadedClient.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="15" column="12" lean-forward="true" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/TCPClientHandler.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="460">
-          <caret line="52" selection-start-line="52" selection-end-line="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Constants.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="48" lean-forward="true" selection-start-line="21" selection-start-column="48" selection-end-line="21" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Commands.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-375">
-          <caret line="533" column="92" selection-start-line="533" selection-start-column="92" selection-end-line="533" selection-end-column="92" />
+        <state relative-caret-position="615">
+          <caret line="41" column="52" selection-start-line="41" selection-start-column="52" selection-end-line="41" selection-end-column="52" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Plugin.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
-          <caret line="12" column="6" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
+          <caret line="1" column="18" selection-start-line="1" selection-start-column="18" selection-end-line="1" selection-end-column="18" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/PluginManager.kt">
+    <entry file="file://$PROJECT_DIR$/src/ChatUser.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="41" column="52" selection-start-line="41" selection-start-column="52" selection-end-line="41" selection-end-column="52" />
+        <state relative-caret-position="135">
+          <caret line="9" column="11" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Observer.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="87" selection-start-line="4" selection-start-column="87" selection-end-line="4" selection-end-column="87" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ChatRoom.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="11" selection-start-line="12" selection-start-column="11" selection-end-line="12" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Observable.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="29" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ChatServerState.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5190">
+          <caret line="346" column="12" selection-start-line="346" selection-start-column="12" selection-end-line="346" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ChatHistory.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="12" column="3" selection-start-line="12" selection-start-column="3" selection-end-line="12" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$KOTLIN_BUNDLED$/lib/kotlin-stdlib-js-sources.jar!/kotlin/Unit.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BijectionMap.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1425">
+          <caret line="95" column="7" selection-start-line="95" selection-start-column="7" selection-end-line="95" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ChatServerListener.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5670">
+          <caret line="381" column="50" selection-start-line="381" selection-start-column="50" selection-end-line="381" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Constants.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="48" selection-start-line="21" selection-start-column="48" selection-end-line="21" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="34" selection-start-line="4" selection-start-column="34" selection-end-line="4" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ThreadedClient.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="705">
+          <caret line="47" column="33" selection-start-line="47" selection-start-column="33" selection-end-line="47" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ServerOutput.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="555">
+          <caret line="37" column="31" selection-start-line="37" selection-start-column="31" selection-end-line="37" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Bijection.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="29" column="31" selection-start-line="29" selection-start-column="31" selection-end-line="29" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Commands.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="630">
+          <caret line="45" column="53" selection-start-line="45" selection-start-column="53" selection-end-line="45" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ClientMessageEvent.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="77" selection-start-line="14" selection-start-column="77" selection-end-line="14" selection-end-column="77" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Interpreter.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="720">
+          <caret line="48" column="9" selection-start-line="48" selection-start-column="9" selection-end-line="48" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/TCPClientHandler.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="310">
+          <caret line="54" column="26" selection-start-line="54" selection-start-column="26" selection-end-line="54" selection-end-column="26" />
         </state>
       </provider>
     </entry>

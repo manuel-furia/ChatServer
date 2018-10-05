@@ -49,7 +49,7 @@ class TCPClientHandler(uid: Long, tcpClient: Socket, observer: Observer<ClientMe
     override fun update(event: ServerMessageEvent) {
         when (event.action){
             ServerMessageEvent.Action.MESSAGE -> if (event.msg != null) send(event.msg)
-            ServerMessageEvent.Action.PING -> send(Constants.pingString + event.msg)
+            ServerMessageEvent.Action.PING -> send(Constants.pingString + event.msg + "\n")
             ServerMessageEvent.Action.STOP -> stop()
             ServerMessageEvent.Action.TIMEOUT -> stop()
             ServerMessageEvent.Action.USER_JOINED -> {}
