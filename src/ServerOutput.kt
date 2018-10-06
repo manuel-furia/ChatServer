@@ -12,8 +12,8 @@
 sealed class ServerOutput {
     //No action
     object None : ServerOutput()
-    //Service message from the server to a specific client
-    data class ServiceMessageToClient(val msg: String, val clientID: Long): ServerOutput()
+    //Service message from the server to a specific client.
+    data class ServiceMessageToClient(val msg: String, val clientID: Long, val containingParsableInfo: Boolean = false): ServerOutput()
     //Service message from the server to all clients in a specific room
     data class ServiceMessageToRoom(val msg: String, val roomName: String): ServerOutput()
     //Service message from the server to everybody
@@ -167,7 +167,7 @@ sealed class ServerOutput {
                 clientID
         )
 
-        fun serviceMessageTo(clientID: Long, message: String) = ServiceMessageToClient(message, clientID)
+        fun serviceMessageTo(clientID: Long, message: String, containingParsableInfo: Boolean = false) = ServiceMessageToClient(message, clientID, containingParsableInfo)
 
 
     }

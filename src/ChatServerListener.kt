@@ -209,14 +209,14 @@ class ChatServerListener (serverState: ChatServerState, val port: Int, val plugi
     /**
      * Send a service message (no user associated with it) to a client identified by clientID
      */
-    private fun serviceMessageToClient(clientID: Long, msg: String): Unit {
+    private fun serviceMessageToClient(clientID: Long, msg: String, containsParsableInfo: Boolean = false): Unit {
         fetchServerMessageObserver(clientID) {
             notifyObserver(
                     it,
                     ServerMessageEvent(
                             ServerMessageEvent.Action.MESSAGE,
                             serverState,
-                            serverMessageFormat(msg)
+                            serverMessageFormat(msg, containsParsableInfo)
                     )
             )
         }
@@ -225,9 +225,9 @@ class ChatServerListener (serverState: ChatServerState, val port: Int, val plugi
     /**
      * Send a service message (no user associated with it) only to a specific room
      */
-    private fun serviceMessageToRoom(roomName: String, msg: String): Unit {
+    private fun serviceMessageToRoom(roomName: String, msg: String, containsParsableInfo: Boolean = false): Unit {
         serverState.getClientIDsInRoom(roomName).forEach {
-            serviceMessageToClient(it, Constants.roomSelectionPrefix + roomName + " " + msg)
+            serviceMessageToClient(it, Constants.roomSelectionPrefix + roomName + " " + msg, containsParsableInfo)
         }
     }
 
@@ -277,11 +277,12 @@ class ChatServerListener (serverState: ChatServerState, val port: Int, val plugi
     /**
      * Format a service message adding the server prefix ":-" to every line, to allow the clients to identify that is a service message
      */
-    private fun serverMessageFormat(msg: String): String{
+    private fun serverMessageFormat(msg: String, containsParsableInfo: Boolean = false): String{
+        val prefix = if (containsParsableInfo) Constants.serverParsableMessagePrefix else Constants.serverMessagePrefix
         if (msg.contains('\n')){
-            return Constants.serverMessagePrefix + " " + msg.replace("\n", "\n" + Constants.serverMessagePrefix + " ") + "\n"
+            return prefix + " " + msg.replace("\n", "\n" + prefix + " ") + "\n"
         } else {
-            return Constants.serverMessagePrefix + " " + msg + "\n"
+            return prefix + " " + msg + "\n"
         }
     }
 
@@ -316,7 +317,7 @@ class ChatServerListener (serverState: ChatServerState, val port: Int, val plugi
                 //Remove the banned ip address from the ban list
                 is ServerOutput.LiftBan -> {synchronized(this){banList = banList - output.bannedIP}}
                 //Send a service message (not associated with a user) to the client identified by output.clientID
-                is ServerOutput.ServiceMessageToClient -> serviceMessageToClient(output.clientID, output.msg)
+                is ServerOutput.ServiceMessageToClient -> serviceMessageToClient(output.clientID, output.msg, output.containingParsableInfo)
                 //Send a service message (not associated with a user) to all the clients in a room
                 is ServerOutput.ServiceMessageToRoom -> serviceMessageToRoom(output.roomName, output.msg)
                 //Send a service message (not associared with a user) to everybody

@@ -122,7 +122,7 @@ class Commands(pluginDirectory: File? = null, errorStream: PrintStream? = null) 
                 }
                 //Create a new server state with appended an output representing a service message to the user that
                 //requested the user list
-                params.server.appendOutput(ServerOutput.serviceMessageTo(params.clientID, message.trim('\n')))
+                params.server.appendOutput(ServerOutput.serviceMessageTo(params.clientID, message.trim('\n'), true))
             },
             //:messages          -> Shows all the messages posted in the room
             //:messages all      -> Shows all the messages in the server (admin only)
@@ -153,7 +153,7 @@ class Commands(pluginDirectory: File? = null, errorStream: PrintStream? = null) 
                     val message = messages.fold("Messages:\n", formatFunc)
                     //Return a new server state with output specifying to send the message list as service message
                     //to the client that requested it
-                    params.server.appendOutput(ServerOutput.serviceMessageTo(params.clientID, message.trim('\n')))
+                    params.server.appendOutput(ServerOutput.serviceMessageTo(params.clientID, message.trim('\n'), containingParsableInfo = true))
                 }else { //No permissions
                     params.server.appendOutput(ServerOutput.roomPermissionDenied(permissions, ChatRoom.UserPermissions.READ, params.clientID))
                 }
@@ -334,7 +334,7 @@ class Commands(pluginDirectory: File? = null, errorStream: PrintStream? = null) 
                 val message = rooms
                         .sortedBy { it.name.toLowerCase() }
                         .fold("Rooms: "){s, r -> s + '\n' + r.name}
-                params.server.appendOutput(ServerOutput.serviceMessageTo(params.clientID, message))
+                params.server.appendOutput(ServerOutput.serviceMessageTo(params.clientID, message, containingParsableInfo = true))
             },
             //:query                            -> Shows all the messages (in the server if admin, in the room if normal user)
             //:query room=room_name             -> Shows only the messages of a room
@@ -374,7 +374,7 @@ class Commands(pluginDirectory: File? = null, errorStream: PrintStream? = null) 
                     val end = getTimestampIfPossible(queryMap.get("end"), false)?.toString()
                     val queryResult = messages.query(queryMap.get("text"), queryMap.get("user"), queryMap.get("room"), start, end)
                     val message = queryResult.getAll().fold("Query result:\n", formatFunc)
-                    params.server.appendOutput(ServerOutput.serviceMessageTo(params.clientID, message.trim('\n')))
+                    params.server.appendOutput(ServerOutput.serviceMessageTo(params.clientID, message.trim('\n'), containingParsableInfo = true))
                 }else {
                     params.server.appendOutput(ServerOutput.roomPermissionDenied(permissions, ChatRoom.UserPermissions.READ, params.clientID))
                 }
