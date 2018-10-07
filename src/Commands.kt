@@ -331,9 +331,15 @@ class Commands(pluginDirectory: File? = null, errorStream: PrintStream? = null) 
                     //Show only rooms without whitelist to normal users
                     params.server.rooms.filter { it.whitelist.size == 0 }
                 }
+                val joinedRooms = params.server.getRoomsByUser(params.user)
                 val message = rooms
                         .sortedBy { it.name.toLowerCase() }
-                        .fold("Rooms: "){s, r -> s + '\n' + r.name}
+                        .fold("Rooms: "){s, r ->
+                            if (joinedRooms.contains(r))
+                                s + '\n' + '*' + r.name
+                            else
+                                s + '\n' + r.name
+                        }
                 params.server.appendOutput(ServerOutput.serviceMessageTo(params.clientID, message, containingParsableInfo = true))
             },
             //:query                            -> Shows all the messages (in the server if admin, in the room if normal user)
