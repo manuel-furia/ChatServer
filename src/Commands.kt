@@ -59,28 +59,32 @@ class Commands(pluginDirectory: File? = null, errorStream: PrintStream? = null) 
                 //Fetch the new username from the argument line
                 val newUsername = getArgumentByIndex(params.argumentLine, 0)
 
-                if (newUsername == "") {
-                    //If the argument was not provided return a server state with an error message appended to the output
-                    params.server.appendOutput(ServerOutput.usernameNotSpecifiedWhenSetting(params.clientID))
-                } else if (params.user.username == Constants.serverConsoleUsername) {
-                    //The server console can not change username, return the server unaltered
-                    params.server
-                } else {
-                    //Try to get a user from the new username provided
-                    val targetUser = params.server.getUserByUsername(newUsername)
-                    if (targetUser != null) { //If we can get a users, it means the username is not unique
-                        params.server.appendOutput(ServerOutput.userAlreadyExistsMessage(params.clientID))
-                    } else { //The username is free
-                        //Get all the rooms in which the old user is present
-                        val rooms = params.server.getRoomsByUser(params.user)
-                        //Send each room a notification message that the user changed their username
-                        val output = rooms.fold(listOf<ServerOutput>()) { out, room ->
-                            out + ServerOutput.userInRoomChangedUsernameMessage(params.user.username, newUsername, room.name)
-                        }
-                        //Return the updated server state
+                if (params.user.username == newUsername)
+                    params.server //The username did not change, do nothing
+                else {
+                    if (newUsername == "") {
+                        //If the argument was not provided return a server state with an error message appended to the output
+                        params.server.appendOutput(ServerOutput.usernameNotSpecifiedWhenSetting(params.clientID))
+                    } else if (params.user.username == Constants.serverConsoleUsername) {
+                        //The server console can not change username, return the server unaltered
                         params.server
-                                .changeUsername(params.user.username, newUsername)
-                                .appendOutput(output)
+                    } else {
+                        //Try to get a user from the new username provided
+                        val targetUser = params.server.getUserByUsername(newUsername)
+                        if (targetUser != null) { //If we can get a users, it means the username is not unique
+                            params.server.appendOutput(ServerOutput.userAlreadyExistsMessage(params.clientID))
+                        } else { //The username is free
+                            //Get all the rooms in which the old user is present
+                            val rooms = params.server.getRoomsByUser(params.user)
+                            //Send each room a notification message that the user changed their username
+                            val output = rooms.fold(listOf<ServerOutput>()) { out, room ->
+                                out + ServerOutput.userInRoomChangedUsernameMessage(params.user.username, newUsername, room.name)
+                            }
+                            //Return the updated server state
+                            params.server
+                                    .changeUsername(params.user.username, newUsername)
+                                    .appendOutput(output)
+                        }
                     }
                 }
             },
@@ -180,17 +184,18 @@ class Commands(pluginDirectory: File? = null, errorStream: PrintStream? = null) 
                 } else {
                     val roomName = getArgumentByIndex(params.argumentLine, 0)
                     val isUserAlreadyInside = params.server.getUsersInRoom(roomName).contains(params.user)
-                    //Decide the message to show to the room (none if the user is already inside)
-                    val message = if (isUserAlreadyInside)
-                        ServerOutput.None
-                    else
-                        ServerOutput.userJoinedRoomMessage(params.user.username, roomName)
 
-                    //Return the updated server state
-                    params.server
-                            .addRoom(roomName)
-                            .userJoinRoom(roomName, params.user.username)
-                            .appendOutput(message)
+                    val message = ServerOutput.userJoinedRoomMessage(params.user.username, roomName)
+
+                    if (!isUserAlreadyInside) {
+                        //Return the updated server state
+                        params.server
+                                .addRoom(roomName)
+                                .userJoinRoom(roomName, params.user.username)
+                                .appendOutput(message)
+                    } else {
+                        params.server
+                    }
                 }
             },
             //Leave the room this command is destined for
