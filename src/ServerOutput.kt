@@ -79,7 +79,7 @@ sealed class ServerOutput {
                 roomName)
 
         fun userLeftRoomMessage(username: String, roomName: String) = ServiceMessageToRoom(
-                "User $username joined left the room.",
+                "User $username left the room.",
                 roomName)
 
         fun userInRoomChangedUsernameMessage(username: String, newUsername: String, roomName: String) = ServiceMessageToRoom(
