@@ -470,8 +470,12 @@ class Commands(pluginDirectory: File? = null, errorStream: PrintStream? = null) 
                     val (serverWithPvtRoom, pvtRoom) = getPvtRoom(params.server, params.user, targetUser)
                     if (pvtRoom != null) {
                         if (pvtRoom.isUserInRoom(params.user)) {
-                            val messageEntry = ChatHistory.Entry(message, params.user, pvtRoom, System.currentTimeMillis())
-                            serverWithPvtRoom.appendOutput(ServerOutput.MessageFromUserToRoom(messageEntry))
+                            if (message != "") {
+                                val messageEntry = ChatHistory.Entry(message, params.user, pvtRoom, System.currentTimeMillis())
+                                serverWithPvtRoom.appendOutput(ServerOutput.MessageFromUserToRoom(messageEntry))
+                            } else {
+                                serverWithPvtRoom
+                            }
                         } else { //The user has been blocked by the target user
                             params.server.appendOutput(ServerOutput.userPvtDeniedMessage(params.clientID))
                         }
